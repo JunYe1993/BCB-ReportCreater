@@ -131,7 +131,7 @@ void __fastcall JunYe_Word::gotoBookmark(String mark){
 		Wd.Range = Wd.ActiveDoc.OlePropertyGet("Bookmarks").OleFunction("Item", OleStr(mark)).OlePropertyGet("Range");
 	}catch(EOleSysError *e){
 		BugReport("BookMark = " + mark);
-		BugReport(L"Ranging Fail¡ABookMark Doesn't exit or Tty Again Later");
+		BugReport(L"Ranging Failï¿½ABookMark Doesn't exit or Tty Again Later");
 	}
 }
 
@@ -179,8 +179,8 @@ bool __fastcall JunYe_Word::getDataTable(int index){
 	try{
 		Range = Wd.DataDoc.OlePropertyGet("Tables").OleFunction("Item",index).OlePropertyGet("Range");
 	}catch(EOleSysError *e){
-		BugReport(L"Ranging Fail¡AThis Word doesn't have No."+IntToStr(index)+" Table.");
-        flag = false;
+		BugReport(L"Ranging Failï¿½AThis Word doesn't have No."+IntToStr(index)+" Table.");
+        	flag = false;
 	}
 	if(flag){
 		Range.OlePropertyGet("Rows").OleFunction("Item",1).OleFunction("Delete");

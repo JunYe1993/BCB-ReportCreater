@@ -23,6 +23,9 @@ const int wdViolet = 12;		//紫羅蘭色。
 const int wdWhite = 8;			//白色。
 const int wdYellow = 7;			//黃色。
 
+const String __tempFileName = "ForProgram_Temp";
+const String __saveFileName = "ForProgram_Save";
+
 struct _FileData
 {
 	String File[3000];

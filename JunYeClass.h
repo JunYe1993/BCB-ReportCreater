@@ -6,6 +6,7 @@
 #include <direct.h>
 #include <io.h>
 #include "inifiles.hpp"
+#include <Vcl.ValEdit.hpp>
 #include "Parameter.h"
 using namespace std;
 
@@ -43,10 +44,18 @@ class INI : public Common
 {
 protected:
 public:
-	void __fastcall WriteInt(AnsiString category, AnsiString parameter, int value);
-	void __fastcall WriteStr(AnsiString category, AnsiString parameter, AnsiString value);
-	int  __fastcall ReadInt(AnsiString category, AnsiString parameter);
-	AnsiString  __fastcall ReadStr(AnsiString category, AnsiString parameter);
+	void __fastcall WriteInt(String category, String parameter, int value);
+	void __fastcall WriteStr(String category, String parameter, String value);
+	void __fastcall WriteBool(String category, String parameter, bool bobo);
+	int  __fastcall ReadInt(String category, String parameter);
+	String  __fastcall ReadStr(String category, String parameter);
+	String  __fastcall ReadStr_Default(String category, String parameter, String defaultstr);
+	bool  __fastcall ReadBool(String category, String parameter);
+	bool  __fastcall ReadBool_Default(String category, String parameter, bool defaultbool);
+
+	void __fastcall deleteSection(String category);
+	bool __fastcall checkSection(String category);
+	void __fastcall setFileMap(String FileName);
 };
 
 class Excel : public Common
@@ -112,6 +121,19 @@ public :
 	// Data Word
 	bool __fastcall getDataTable(int index);
 	int  __fastcall test();
+};
+
+class JunYe_TValueListEditor : protected INI
+{
+protected :
+public :
+	void __fastcall deleteAllRow(TValueListEditor* List);
+	void __fastcall saveAllRow(TValueListEditor* List, String category);
+	void __fastcall insertRow(TValueListEditor* List, String Category, String key);
+
+    void __fastcall setDropList(TValueListEditor* List, int index, TStringList* li);
+	TStringList* __fastcall getGender_Eng();
+	TStringList* __fastcall getGender_Chi();
 };
 
 #endif
