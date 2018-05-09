@@ -1,6 +1,7 @@
 #ifndef JUNYECLASSH
 #define JUNYECLASSH
 
+
 #include <vcl.h>
 #include <vector>
 #include <direct.h>
@@ -8,6 +9,7 @@
 #include "inifiles.hpp"
 #include <Vcl.ValEdit.hpp>
 #include "Parameter.h"
+
 using namespace std;
 
 class Common
@@ -48,6 +50,7 @@ public:
 	void __fastcall WriteStr(String category, String parameter, String value);
 	void __fastcall WriteBool(String category, String parameter, bool bobo);
 	int  __fastcall ReadInt(String category, String parameter);
+	int  __fastcall ReadInt_Default(String category, String parameter, int defaultint);
 	String  __fastcall ReadStr(String category, String parameter);
 	String  __fastcall ReadStr_Default(String category, String parameter, String defaultstr);
 	bool  __fastcall ReadBool(String category, String parameter);
@@ -55,7 +58,7 @@ public:
 
 	void __fastcall deleteSection(String category);
 	bool __fastcall checkSection(String category);
-	void __fastcall setFileMap(String FileName);
+	void __fastcall setFileMap(String FileNameSection, String FileName);
 };
 
 class Excel : public Common
@@ -129,6 +132,7 @@ protected :
 public :
 	void __fastcall deleteAllRow(TValueListEditor* List);
 	void __fastcall saveAllRow(TValueListEditor* List, String category);
+	void __fastcall saveAllRow_CommonVersion(TValueListEditor* List, String category, String parameter);
 	void __fastcall insertRow(TValueListEditor* List, String Category, String key);
 
     void __fastcall setDropList(TValueListEditor* List, int index, TStringList* li);

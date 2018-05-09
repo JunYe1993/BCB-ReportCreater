@@ -1,4 +1,5 @@
 #include "JunYeClass.h"
+#include "StringParameter.h"
 
 void __fastcall INI::WriteInt(String category, String parameter, int value)
 {
@@ -27,6 +28,15 @@ int  __fastcall INI::ReadInt(String category, String parameter)
 	TIniFile *IniFile;
 	IniFile = new TIniFile(ChangeFileExt(Application->ExeName, ".ini"));
 	value = IniFile->ReadInteger(category, parameter, 0);
+	delete IniFile;
+	return value;
+}
+int  __fastcall INI::ReadInt_Default(String category, String parameter, int defaultint)
+{
+	int value;
+	TIniFile *IniFile;
+	IniFile = new TIniFile(ChangeFileExt(Application->ExeName, ".ini"));
+	value = IniFile->ReadInteger(category, parameter, defaultint);
 	delete IniFile;
 	return value;
 }
@@ -80,8 +90,8 @@ bool __fastcall INI::checkSection(String category)
 	delete IniFile;
 	return bobo;
 }
-void __fastcall INI::setFileMap(String FileName){
-	int value = ReadInt(__saveFileName, "Num");
-	WriteInt(__saveFileName, "Num", ++value);
-	WriteStr(__saveFileName, IntToStr(value), FileName);
+void __fastcall INI::setFileMap(String FileNameSection,String FileName){
+	int value = ReadInt(FileNameSection, "Num");
+	WriteInt(FileNameSection, "Num", ++value);
+	WriteStr(FileNameSection, IntToStr(value), FileName);
 }

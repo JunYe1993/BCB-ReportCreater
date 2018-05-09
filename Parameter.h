@@ -1,5 +1,5 @@
-#ifndef OleParameterH
-#define OleParameterH
+#ifndef PARAMETERH
+#define PARAMETERH
 
 //#include <OleServer.hpp>
 #include "Comobj.hpp"
@@ -22,9 +22,6 @@ const int wdTurquoise = 3;		//淺粉藍色。
 const int wdViolet = 12;		//紫羅蘭色。
 const int wdWhite = 8;			//白色。
 const int wdYellow = 7;			//黃色。
-
-const String __tempFileName = "ForProgram_Temp";
-const String __saveFileName = "ForProgram_Save";
 
 struct _FileData
 {
