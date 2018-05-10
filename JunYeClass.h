@@ -134,6 +134,7 @@ public :
 	void __fastcall saveAllRow(TValueListEditor* List, String category);
 	void __fastcall saveAllRow_CommonVersion(TValueListEditor* List, String category, String parameter);
 	void __fastcall insertRow(TValueListEditor* List, String Category, String key);
+	void __fastcall insertRow_CommonVersion(TValueListEditor* List, String Category, String key);
 
     void __fastcall setDropList(TValueListEditor* List, int index, TStringList* li);
 	TStringList* __fastcall getGender_Eng();

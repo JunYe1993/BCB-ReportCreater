@@ -28,7 +28,10 @@ void __fastcall JunYe_TValueListEditor::insertRow(TValueListEditor* List, String
 	String value = ReadStr(Category, List->Name + key);
 	List->InsertRow(key, value, true);
 }
-
+void __fastcall JunYe_TValueListEditor::insertRow_CommonVersion(TValueListEditor* List, String Category, String parameter,String key){
+	//String value = ReadStr(Category, List->Name + key);
+	//List->InsertRow(key, value, true);
+}
 void __fastcall JunYe_TValueListEditor::setDropList(TValueListEditor* List, int index, TStringList* li){
     List->ItemProps[index]->EditStyle = esPickList;
 	List->ItemProps[index]->PickList = li;

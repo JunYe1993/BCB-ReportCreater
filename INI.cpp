@@ -53,7 +53,8 @@ String  __fastcall INI::ReadStr_Default(String category, String parameter, Strin
 	String value;
 	TIniFile *IniFile;
 	IniFile = new TIniFile(ChangeFileExt(Application->ExeName, ".ini"));
-	value = IniFile->ReadString(category, parameter, defaultstr);
+	value = IniFile->ReadString(category, parameter, value);
+	if(value == "")value = defaultstr;
 	delete IniFile;
 	return value;
 }
