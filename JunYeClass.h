@@ -2,12 +2,17 @@
 #define JUNYECLASSH
 
 
-#include <vcl.h>
+
 #include <vector>
 #include <direct.h>
 #include <io.h>
 #include "inifiles.hpp"
+
+#include <vcl.h>
 #include <Vcl.ValEdit.hpp>
+#include <Vcl.CheckLst.hpp>
+#include <Xml.XMLDoc.hpp>
+
 #include "Parameter.h"
 
 using namespace std;
@@ -25,21 +30,22 @@ public :
 	void __fastcall DataReport(AnsiString filename, AnsiString msg);
 };
 
-class Files : public Common
+class EN301489_Files : public Common
 {
 private :
 	_FileData Dir;
 	void __fastcall extractpath();
 public :
-    Files();
+	EN301489_Files();
 	void __fastcall getFiles(String path, int layer);
 
 	int __fastcall getModeCount();
 	int __fastcall getFileCount();
-    int __fastcall getModeFileCount(int index);
+	int __fastcall getModeFileCount(int index);
 	String __fastcall getModeName(int index);
 	String __fastcall getFile(int index);
 	String __fastcall getModeFile(int ModeIndex, int FileIndex);
+    void __fastcall sortMode();
 };
 
 class INI : public Common
@@ -59,6 +65,14 @@ public:
 	void __fastcall deleteSection(String category);
 	bool __fastcall checkSection(String category);
 	void __fastcall setFileMap(String FileNameSection, String FileName);
+};
+
+class JunYe_XML : public Common
+{
+protected:
+public:
+	void __fastcall test();
+    void __fastcall load();
 };
 
 class Excel : public Common
@@ -134,11 +148,20 @@ public :
 	void __fastcall saveAllRow(TValueListEditor* List, String category);
 	void __fastcall saveAllRow_CommonVersion(TValueListEditor* List, String category, String parameter);
 	void __fastcall insertRow(TValueListEditor* List, String Category, String key);
-	void __fastcall insertRow_CommonVersion(TValueListEditor* List, String Category, String key);
+	void __fastcall insertRow_CommonVersion(TValueListEditor* List, String Category, String parameter,String key);
 
     void __fastcall setDropList(TValueListEditor* List, int index, TStringList* li);
 	TStringList* __fastcall getGender_Eng();
 	TStringList* __fastcall getGender_Chi();
+};
+
+class JunYe_TCheckListBox : protected INI
+{
+protected :
+public :
+	void __fastcall deleteAllRow(TCheckListBox* List);
+	void __fastcall saveAllRow(TCheckListBox* clb, String category);
+	void __fastcall loadAllRow(TCheckListBox* clb, String category);
 };
 
 #endif

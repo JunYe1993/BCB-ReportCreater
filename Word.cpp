@@ -1,4 +1,4 @@
-#include "JunYeClass.h"
+﻿#include "JunYeClass.h"
 
 // private
 void __fastcall JunYe_Word::getMarks(){
@@ -66,13 +66,11 @@ void __fastcall JunYe_Word::Close(){
 ////////////////////////////////////////////////////////////////////////////////
 int __fastcall JunYe_Word::getTableCount(){
     String x = Wd.ActiveDoc.OlePropertyGet("Tables").OlePropertyGet("Count");
-	BugReport("Tables : " + x);
 	return Wd.ActiveDoc.OlePropertyGet("Tables").OlePropertyGet("Count");
 }
 int __fastcall JunYe_Word::getTableRowCount(int index){
     String n = index;
 	String x = Wd.ActiveDoc.OlePropertyGet("Tables").OleFunction("Item",index).OlePropertyGet("Rows").OlePropertyGet("Count");
-	BugReport("Table : "+ n +" > RowCount = "+ x);
 	return Wd.ActiveDoc.OlePropertyGet("Tables").OleFunction("Item",index).OlePropertyGet("Rows").OlePropertyGet("Count");
 }
 void __fastcall JunYe_Word::getTable(int index){
@@ -107,7 +105,6 @@ void __fastcall JunYe_Word::getTableRow(int index, int RowIndex){
 /////////////////////////////////   SHAPE   ////////////////////////////////////
 int __fastcall JunYe_Word::getInlineShapeCount(){
 	String x = Wd.ActiveDoc.OlePropertyGet("InlineShapes").OlePropertyGet("Count");
-	BugReport("Shapes : " + x);
 	return Wd.ActiveDoc.OlePropertyGet("InlineShapes").OlePropertyGet("Count");
 }
 void __fastcall JunYe_Word::getInlineShape(int index){

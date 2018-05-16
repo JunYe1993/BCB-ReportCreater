@@ -49,3 +49,30 @@ TStringList* __fastcall JunYe_TValueListEditor::getGender_Chi(){
 	stringlist->Add("¤k");
 	return stringlist;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+void __fastcall JunYe_TCheckListBox::deleteAllRow(TCheckListBox* List){
+    int rowcount = List->Items->Count;
+	for(int i = 0; i < rowcount; i++){
+        List->Items->Delete(0);
+	}
+}
+void __fastcall JunYe_TCheckListBox::saveAllRow(TCheckListBox* List, String category){
+	int rowcount = List->Items->Count;
+	WriteInt(category, List->Name + "Num", rowcount);
+	for(int i = 0; i < rowcount; i++){
+		WriteStr(category, List->Name + IntToStr(i) + "1", List->Items->Strings[i]);
+		WriteBool(category, List->Name + IntToStr(i) + "2", List->Checked[i]);
+	}
+}
+void __fastcall JunYe_TCheckListBox::loadAllRow(TCheckListBox* List, String category){
+	int rowcount = ReadInt(category, List->Name + "Num");
+	for(int i = 0; i < rowcount; i++){
+		List->Items->Add(ReadStr(category, List->Name + IntToStr(i) + "1"));
+		List->Checked[i] = ReadBool(category, List->Name + IntToStr(i) + "2");
+	}
+}
