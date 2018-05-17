@@ -26,6 +26,9 @@ void __fastcall Common::Timer(unsigned long x){
 void __fastcall Common::CreateReportpath(){
 	_wmkdir(L"Report");
 }
+void __fastcall Common::CreateReportpath(String str){
+	_wmkdir(str.w_str());
+}
 void __fastcall Common::initBugReport(){
 	String OutputPath = ExtractFilePath(Application->ExeName) + "Debug.txt";
 	FILE *fp = _wfopen(OutputPath.w_str(), L"w+");

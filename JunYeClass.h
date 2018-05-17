@@ -1,8 +1,6 @@
 #ifndef JUNYECLASSH
 #define JUNYECLASSH
 
-
-
 #include <vector>
 #include <direct.h>
 #include <io.h>
@@ -14,6 +12,7 @@
 #include <Xml.XMLDoc.hpp>
 
 #include "Parameter.h"
+//#include "XML.h"
 
 using namespace std;
 
@@ -24,6 +23,7 @@ public :
 	void __fastcall SortDouble(vector<double> &nums, int left, int right);
 	void __fastcall Timer(unsigned long x);
 	void __fastcall CreateReportpath();
+	void __fastcall CreateReportpath(String str);
 	void __fastcall initBugReport();
 	void __fastcall initDataReport(AnsiString filename);
 	void __fastcall BugReport(AnsiString msg);
@@ -65,14 +65,6 @@ public:
 	void __fastcall deleteSection(String category);
 	bool __fastcall checkSection(String category);
 	void __fastcall setFileMap(String FileNameSection, String FileName);
-};
-
-class JunYe_XML : public Common
-{
-protected:
-public:
-	void __fastcall test();
-    void __fastcall load();
 };
 
 class Excel : public Common

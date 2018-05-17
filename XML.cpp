@@ -1,6 +1,47 @@
-#include "JunYeClass.h"
+#include "XML.h"
 
-void __fastcall JunYe_XML::test(){
+XML::XML(String FileName){
+	struct _wffblk file;
+	filename = FileName + ".xml";
+	xmlfile = NewXMLDocument();
+	if(_wfindfirst(filename.w_str(), &file, 0) == -1){
+		xmlfile->AddChild("root");
+		xmlnode = xmlfile->GetDocumentElement();
+		xmlnode->SetAttribute("Name", ExtractFileName(FileName));
+	}else{
+		xmlfile->LoadFromFile(filename);
+        xmlnode = xmlfile->GetDocumentElement();
+	}
+}
+void __fastcall XML::setLayer1Node(String NodeName, bool intolayer){
+    xmlnode = xmlfile->GetDocumentElement();
+	if(xmlnode->GetChildNodes()->FindNode(NodeName) == NULL){
+		if(intolayer){
+			xmlnode = xmlnode->AddChild(NodeName);
+		}else{
+			xmlnode->AddChild(NodeName);
+		}
+	}else{
+		xmlnode = xmlnode->GetChildNodes()->FindNode(NodeName);
+	}
+}
+void __fastcall XML::addChildInCurrentNode(String NodeName, bool intolayer){
+	if(xmlnode->GetChildNodes()->FindNode(NodeName) == NULL){
+		xmlnode->AddChild(NodeName);
+    }
+}
+void __fastcall XML::addChildInCurrentNode(String NodeName, String Value){
+	if(xmlnode->GetChildNodes()->FindNode(NodeName) == NULL){
+        xmlnode->AddChild(NodeName);
+		xmlnode->SetChildValue(NodeName, Value);
+	}
+}
+void __fastcall XML::saveXML(){
+	xmlfile->SaveToFile(filename);
+	xmlfile->Release();
+	xmlnode->Release();
+}
+void __fastcall XML::test(){
 	_di_IXMLDocument xml = NewXMLDocument();
 	xml->AddChild("Hi");
 
@@ -18,7 +59,7 @@ void __fastcall JunYe_XML::test(){
 	xml->Release();
 	load();
 }
-void __fastcall JunYe_XML::load(){
+void __fastcall XML::load(){
 	_di_IXMLDocument xml = NewXMLDocument();
 	xml->LoadFromFile(ExtractFilePath(Application->ExeName)+"netbar.xml");
 
