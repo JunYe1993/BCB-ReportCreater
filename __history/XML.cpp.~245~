@@ -1,8 +1,9 @@
-#include "XML.h"
+#include "Xml.h"
 
 XML::XML(String FileName){
 	struct _wffblk file;
-	filename = FileName + ".xml";
+	if(FileName.Pos(".xml")<1)
+		filename = FileName + ".xml";
 	xmlfile = NewXMLDocument();
 	if(_wfindfirst(filename.w_str(), &file, 0) == -1){
 		xmlfile->AddChild("root");
@@ -13,7 +14,9 @@ XML::XML(String FileName){
 		xmlnode = xmlfile->GetDocumentElement();
 	}
 }
-void __fastcall XML::getXMLFiles(String Path)
+TStringList* __fastcall XML::getXMLFiles(String Path){
+	return getFiles(Path, "xml");
+}
 void __fastcall XML::setLayer1Node(String NodeName, bool intoLayer){
 	NodeName = checkFirstLetter(NodeName);
 	xmlnode = xmlfile->GetDocumentElement();
@@ -473,3 +476,4 @@ String __fastcall XML::checkFirstLetter(String str){
 
 	return str;
 }
+

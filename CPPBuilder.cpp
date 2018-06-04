@@ -1,5 +1,5 @@
 #include "CPPBuilder.h"
-#include "Xml.h"
+#include "XML.h"
 
 void __fastcall JunYe_TValueListEditor::deleteAllRow(TValueListEditor* List){
 	int rowcount = List->RowCount;

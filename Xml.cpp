@@ -1,4 +1,4 @@
-#include "Xml.h"
+#include "XML.h"
 
 XML::XML(String FileName){
 	struct _wffblk file;
