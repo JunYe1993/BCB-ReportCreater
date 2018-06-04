@@ -9,6 +9,7 @@ const String __prefixNameCard = "ForProgram_NameCard_";
 const String __SavePath = "Save\\";
 const String __NameCardPath = "NameCard\\";
 
+<<<<<<< HEAD
 struct TempFile
 {
 	String key[100];
@@ -19,4 +20,6 @@ struct TempFile
 };
 
 
+=======
+>>>>>>> parent of ebd8874... commit test
 #endif

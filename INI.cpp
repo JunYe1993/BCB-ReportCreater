@@ -1,4 +1,8 @@
 #include "JunYeClass.h"
+<<<<<<< HEAD
+=======
+#include "StringParameter.h"
+>>>>>>> parent of ebd8874... commit test
 
 void __fastcall INI::WriteInt(String category, String parameter, int value)
 {

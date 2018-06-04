@@ -2,6 +2,7 @@
 #define XMLH
 
 #include "JunYeClass.h"
+<<<<<<< HEAD
 #include <Xml.XMLDoc.hpp>
 
 class Files;
@@ -11,12 +12,22 @@ private:
 	bool __fastcall getCurNodeChild(String NodeName);
 	bool __fastcall getLayer1Node(String NodeName);
 	String __fastcall checkFirstLetter(String str);
+=======
+#include <vcl.h>
+#include <Xml.XMLDoc.hpp>
+
+class Common;
+class XML : public Common
+{
+private:
+>>>>>>> parent of ebd8874... commit test
 protected:
 	_di_IXMLDocument xmlfile;
 	_di_IXMLNode xmlnode;
 	String filename;
 public:
 	XML(String FileName);
+<<<<<<< HEAD
 	TStringList* __fastcall getXMLFiles(String Path);
 	void __fastcall setLayer1Node(String NodeName, bool intoLayer);
 	void __fastcall setLayer2Node(String Layer1NodeName, String NodeName, bool intoLayer);
@@ -61,6 +72,11 @@ public:
 	String __fastcall getNodeChildValue(String NodeName);
 	bool __fastcall getNodeChildBoolValue(int index);
 
+=======
+	void __fastcall setLayer1Node(String NodeName, bool intoLayer);
+	void __fastcall addChildInCurrentNode(String NodeName, bool intolayer);
+	void __fastcall addChildInCurrentNode(String NodeName, String Value);
+>>>>>>> parent of ebd8874... commit test
 	void __fastcall saveXML();
 	void __fastcall test();
 	void __fastcall load();
