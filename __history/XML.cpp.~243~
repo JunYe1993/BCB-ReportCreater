@@ -2,7 +2,9 @@
 
 XML::XML(String FileName){
 	struct _wffblk file;
-	filename = FileName + ".xml";
+	if(FileName.Pos(".xml")<1)
+		filename = FileName + ".xml";
+	BugReport(filename);
 	xmlfile = NewXMLDocument();
 	if(_wfindfirst(filename.w_str(), &file, 0) == -1){
 		xmlfile->AddChild("root");
@@ -13,8 +15,11 @@ XML::XML(String FileName){
 		xmlnode = xmlfile->GetDocumentElement();
 	}
 }
+TStringList* __fastcall XML::getXMLFiles(String Path){
+	return getFiles(Path, "xml");
+}
 void __fastcall XML::setLayer1Node(String NodeName, bool intoLayer){
-    NodeName = checkFirstLetter(NodeName);
+	NodeName = checkFirstLetter(NodeName);
 	xmlnode = xmlfile->GetDocumentElement();
 	if(xmlnode->GetChildNodes()->FindNode(NodeName) == NULL){
 		if(intoLayer){

@@ -78,24 +78,20 @@ TStringList* __fastcall Files::getFiles(String Path, String Ext){
 	struct _finddata_t  file;
 	x = _findfirst("*.*", &file);
 	temp = file.name;
-	if(temp.Pos(Ext)){
-		strlist->Add(Path + "\\" + temp);
-		Dir.Path[Dir.Count] = Path;
-		Dir.File[Dir.Count++].sprintf(L"%s\\%s", Path, temp);
-	}
+	if(temp.Pos(Ext))
+		strlist->Add(temp);
 	while(_findnext(x,&file) == 0){
 		temp = file.name;
-		if(temp.Pos(Ext)){
-            strlist->Add(Path + "\\" + temp);
-			Dir.Path[Dir.Count] = Path;
-			Dir.File[Dir.Count++].sprintf(L"%s\\%s", Path, temp);
-		}
+		if(temp.Pos(Ext))
+			strlist->Add(temp);
 	}
+	_wchdir(L"..");
+	return strlist;
 }
 void __fastcall Files::getFiles(String path, int layer){
 	String temp;
 	long x;
-	BugReport(path);
+	//BugReport(path);
 
 	while(_wchdir(path.w_str()) == -1)BugReport(L"chdir got wrong");
 	if(layer == 1){

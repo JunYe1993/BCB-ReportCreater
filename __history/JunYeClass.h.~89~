@@ -1,8 +1,6 @@
 #ifndef JUNYECLASSH
 #define JUNYECLASSH
 
-
-
 #include <vector>
 #include <direct.h>
 #include <io.h>
@@ -14,7 +12,10 @@
 #include <Xml.XMLDoc.hpp>
 
 #include "Parameter.h"
-#include "XML.h"
+<<<<<<< HEAD
+=======
+//#include "XML.h"
+>>>>>>> parent of ebd8874... commit test
 
 using namespace std;
 
@@ -32,6 +33,19 @@ public :
 	void __fastcall DataReport(AnsiString filename, AnsiString msg);
 };
 
+<<<<<<< HEAD
+class Files : public Common
+{
+private :
+	_FileData Dir;
+public :
+	Files();
+	TStringList* __fastcall getFiles(String Path, String Ext);
+	void __fastcall getFiles(String path, int layer);
+};
+
+=======
+>>>>>>> parent of ebd8874... commit test
 class EN301489_Files : public Common
 {
 private :
@@ -47,7 +61,11 @@ public :
 	String __fastcall getModeName(int index);
 	String __fastcall getFile(int index);
 	String __fastcall getModeFile(int ModeIndex, int FileIndex);
+<<<<<<< HEAD
+	void __fastcall sortMode();
+=======
     void __fastcall sortMode();
+>>>>>>> parent of ebd8874... commit test
 };
 
 class INI : public Common
@@ -134,6 +152,9 @@ public :
 	int  __fastcall test();
 };
 
+<<<<<<< HEAD
+
+=======
 class JunYe_TValueListEditor : protected INI
 {
 protected :
@@ -157,5 +178,6 @@ public :
 	void __fastcall saveAllRow(TCheckListBox* clb, String category);
 	void __fastcall loadAllRow(TCheckListBox* clb, String category);
 };
+>>>>>>> parent of ebd8874... commit test
 
 #endif

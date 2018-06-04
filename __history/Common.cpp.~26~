@@ -64,31 +64,29 @@ void __fastcall Common::DataReport(AnsiString filename, AnsiString msg)
 Files::Files(){
 	Dir.Count = 0;
 }
-TStringList __fastcall Files::getFiles(String Path, String Ext){
-    TStringList strlist;
-	long x;
+TStringList* __fastcall Files::getFiles(String Path, String Ext){
+	TStringList *strlist = new TStringList;
 	String temp;
-	BugReport(Path);
+	long x;
 
+	BugReport(Path);
 	if(_wchdir(Path.w_str()) == -1){
 		BugReport(L"chdir "+Path+" got wrong");
-		return;
+		return NULL;
 	}
 
 	struct _finddata_t  file;
 	x = _findfirst("*.*", &file);
 	temp = file.name;
-	if(temp.Pos(Ext)){
-		Dir.Path[Dir.Count] = Path;
-		Dir.File[Dir.Count++].sprintf(L"%s\\%s", Path, temp);
-	}
+	if(temp.Pos(Ext))
+		strlist->Add(temp);
 	while(_findnext(x,&file) == 0){
 		temp = file.name;
-		if(temp.Pos(Ext)){
-			Dir.Path[Dir.Count] = Path;
-			Dir.File[Dir.Count++].sprintf(L"%s\\%s", Path, temp);
-		}
+		if(temp.Pos(Ext))
+			strlist->Add(temp);
 	}
+	_wchdir(L"..");
+	return strlist;
 }
 void __fastcall Files::getFiles(String path, int layer){
 	String temp;

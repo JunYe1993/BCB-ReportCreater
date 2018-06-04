@@ -12,10 +12,7 @@
 #include <Xml.XMLDoc.hpp>
 
 #include "Parameter.h"
-<<<<<<< HEAD
-=======
 //#include "XML.h"
->>>>>>> parent of ebd8874... commit test
 
 using namespace std;
 
@@ -33,7 +30,6 @@ public :
 	void __fastcall DataReport(AnsiString filename, AnsiString msg);
 };
 
-<<<<<<< HEAD
 class Files : public Common
 {
 private :
@@ -44,8 +40,6 @@ public :
 	void __fastcall getFiles(String path, int layer);
 };
 
-=======
->>>>>>> parent of ebd8874... commit test
 class EN301489_Files : public Common
 {
 private :
@@ -61,11 +55,8 @@ public :
 	String __fastcall getModeName(int index);
 	String __fastcall getFile(int index);
 	String __fastcall getModeFile(int ModeIndex, int FileIndex);
-<<<<<<< HEAD
+
 	void __fastcall sortMode();
-=======
-    void __fastcall sortMode();
->>>>>>> parent of ebd8874... commit test
 };
 
 class INI : public Common
@@ -151,33 +142,5 @@ public :
 	bool __fastcall getDataTable(int index);
 	int  __fastcall test();
 };
-
-<<<<<<< HEAD
-
-=======
-class JunYe_TValueListEditor : protected INI
-{
-protected :
-public :
-	void __fastcall deleteAllRow(TValueListEditor* List);
-	void __fastcall saveAllRow(TValueListEditor* List, String category);
-	void __fastcall saveAllRow_CommonVersion(TValueListEditor* List, String category, String parameter);
-	void __fastcall insertRow(TValueListEditor* List, String Category, String key);
-	void __fastcall insertRow_CommonVersion(TValueListEditor* List, String Category, String parameter,String key);
-
-    void __fastcall setDropList(TValueListEditor* List, int index, TStringList* li);
-	TStringList* __fastcall getGender_Eng();
-	TStringList* __fastcall getGender_Chi();
-};
-
-class JunYe_TCheckListBox : protected INI
-{
-protected :
-public :
-	void __fastcall deleteAllRow(TCheckListBox* List);
-	void __fastcall saveAllRow(TCheckListBox* clb, String category);
-	void __fastcall loadAllRow(TCheckListBox* clb, String category);
-};
->>>>>>> parent of ebd8874... commit test
 
 #endif

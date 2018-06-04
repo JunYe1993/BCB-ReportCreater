@@ -58,7 +58,6 @@ void __fastcall Common::DataReport(AnsiString filename, AnsiString msg)
 	fclose(fp);
 
 }
-<<<<<<< HEAD
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -70,7 +69,7 @@ TStringList* __fastcall Files::getFiles(String Path, String Ext){
 	String temp;
 	long x;
 
-	BugReport(Path);
+	//BugReport(Path);
 	if(_wchdir(Path.w_str()) == -1){
 		BugReport(L"chdir "+Path+" got wrong");
 		return NULL;
@@ -125,6 +124,4 @@ void __fastcall Files::getFiles(String path, int layer){
 	_wchdir(L"..");
 	return;
 }
-=======
->>>>>>> parent of ebd8874... commit test
 

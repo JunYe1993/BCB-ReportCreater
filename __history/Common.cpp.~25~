@@ -58,6 +58,7 @@ void __fastcall Common::DataReport(AnsiString filename, AnsiString msg)
 	fclose(fp);
 
 }
+<<<<<<< HEAD
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -78,18 +79,15 @@ TStringList* __fastcall Files::getFiles(String Path, String Ext){
 	struct _finddata_t  file;
 	x = _findfirst("*.*", &file);
 	temp = file.name;
-	if(temp.Pos(Ext)){
-		strlist->Add(Path + "\\" + temp);
-		Dir.Path[Dir.Count] = Path;
-		Dir.File[Dir.Count++].sprintf(L"%s\\%s", Path, temp);
-	}
+	if(temp.Pos(Ext))
+		strlist->Add(temp);
 	while(_findnext(x,&file) == 0){
 		temp = file.name;
-		if(temp.Pos(Ext)){
-			Dir.Path[Dir.Count] = Path;
-			Dir.File[Dir.Count++].sprintf(L"%s\\%s", Path, temp);
-		}
+		if(temp.Pos(Ext))
+			strlist->Add(temp);
 	}
+	_wchdir(L"..");
+	return strlist;
 }
 void __fastcall Files::getFiles(String path, int layer){
 	String temp;
@@ -127,4 +125,6 @@ void __fastcall Files::getFiles(String path, int layer){
 	_wchdir(L"..");
 	return;
 }
+=======
+>>>>>>> parent of ebd8874... commit test
 
