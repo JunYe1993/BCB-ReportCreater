@@ -9,25 +9,6 @@ void __fastcall JunYe_TValueListEditor::deleteAllRow(TValueListEditor* List){
 		}
 	}
 }
-void __fastcall JunYe_TValueListEditor::saveAllRow(TValueListEditor* List, String Category){
-	int rowcount = List->RowCount;
-	if(rowcount > 1 && List->Keys[1] != ""){
-		for(int i = 1; i < rowcount; i++){
-			WriteStr(Category, List->Name + List->Keys[i], List->Values[List->Keys[i]]);
-		}
-	}
-}
-void __fastcall JunYe_TValueListEditor::saveAllRow(TValueListEditor* List, String Category, String FileName){
-	//
-}
-void __fastcall JunYe_TValueListEditor::saveAllRow_CommonVersion(TValueListEditor* List, String Category, String parameter){
-	int rowcount = List->RowCount;
-	if(rowcount > 1 && List->Keys[1] != ""){
-		for(int i = 1; i < rowcount; i++){
-			WriteStr(Category, parameter + List->Keys[i], List->Values[List->Keys[i]]);
-		}
-	}
-}
 void __fastcall JunYe_TValueListEditor::insertRow(TValueListEditor* List, String Category, String key){
 	String value = ReadStr(Category, List->Name + key);
 	List->InsertRow(key, value, true);

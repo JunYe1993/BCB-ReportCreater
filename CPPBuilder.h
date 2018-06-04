@@ -9,9 +9,6 @@ class JunYe_TValueListEditor : protected INI
 protected :
 public :
 	void __fastcall deleteAllRow(TValueListEditor* List);
-	void __fastcall saveAllRow(TValueListEditor* List, String category);
-	void __fastcall saveAllRow(TValueListEditor* List, String Category,String FileName);
-	void __fastcall saveAllRow_CommonVersion(TValueListEditor* List, String category, String parameter);
 	void __fastcall insertRow(TValueListEditor* List, String Category, String key);
 	void __fastcall changeKeyValue(TValueListEditor* List, String Key, String Value);
 

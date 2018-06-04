@@ -69,7 +69,6 @@ TStringList* __fastcall Files::getFiles(String Path, String Ext){
 	String temp;
 	long x;
 
-	//BugReport(Path);
 	if(_wchdir(Path.w_str()) == -1){
 		BugReport(L"chdir "+Path+" got wrong");
 		return NULL;

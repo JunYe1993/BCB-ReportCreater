@@ -1,4 +1,4 @@
-#include "CPPBuilder.h"\
+#include "CPPBuilder.h"
 #include "Xml.h"
 
 void __fastcall JunYe_TValueListEditor::deleteAllRow(TValueListEditor* List){
@@ -17,6 +17,9 @@ void __fastcall JunYe_TValueListEditor::saveAllRow(TValueListEditor* List, Strin
 		}
 	}
 }
+void __fastcall JunYe_TValueListEditor::saveAllRow(TValueListEditor* List, String Category, String FileName){
+	//
+}
 void __fastcall JunYe_TValueListEditor::saveAllRow_CommonVersion(TValueListEditor* List, String Category, String parameter){
 	int rowcount = List->RowCount;
 	if(rowcount > 1 && List->Keys[1] != ""){
@@ -29,12 +32,14 @@ void __fastcall JunYe_TValueListEditor::insertRow(TValueListEditor* List, String
 	String value = ReadStr(Category, List->Name + key);
 	List->InsertRow(key, value, true);
 }
-void __fastcall JunYe_TValueListEditor::insertRow_CommonVersion(TValueListEditor* List, String Category, String parameter,String key){
-	//String value = ReadStr(Category, List->Name + key);
-	//List->InsertRow(key, value, true);
+void __fastcall JunYe_TValueListEditor::changeKeyValue(TValueListEditor* List, String Key, String Value){
+	int temp;
+	if(List->FindRow(Key, temp)){
+		List->Values[Key] = Value;
+	}
 }
 void __fastcall JunYe_TValueListEditor::setDropList(TValueListEditor* List, int index, TStringList* li){
-    List->ItemProps[index]->EditStyle = esPickList;
+	List->ItemProps[index]->EditStyle = esPickList;
 	List->ItemProps[index]->PickList = li;
 	List->ItemProps[index]->ReadOnly = true;
 }
@@ -86,20 +91,5 @@ void __fastcall JunYe_TCheckListBox::changeItemValue(TCheckListBox* List, String
 		BugReport("Function Error : JunYe_TCheckListBox::changeItemValue");
 		BugReport("The Item ("+Item+") is not exist!!");
 		BugReport("----------------------------------------------------------");
-	}
-}
-void __fastcall JunYe_TCheckListBox::saveAllRow(TCheckListBox* List, String category){
-	int rowcount = List->Items->Count;
-	WriteInt(category, List->Name + "Num", rowcount);
-	for(int i = 0; i < rowcount; i++){
-		WriteStr(category, List->Name + IntToStr(i) + "1", List->Items->Strings[i]);
-		WriteBool(category, List->Name + IntToStr(i) + "2", List->Checked[i]);
-	}
-}
-void __fastcall JunYe_TCheckListBox::loadAllRow(TCheckListBox* List, String category){
-	int rowcount = ReadInt(category, List->Name + "Num");
-	for(int i = 0; i < rowcount; i++){
-		List->Items->Add(ReadStr(category, List->Name + IntToStr(i) + "1"));
-		List->Checked[i] = ReadBool(category, List->Name + IntToStr(i) + "2");
 	}
 }

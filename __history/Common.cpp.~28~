@@ -69,7 +69,7 @@ TStringList* __fastcall Files::getFiles(String Path, String Ext){
 	String temp;
 	long x;
 
-	BugReport(Path);
+	//BugReport(Path);
 	if(_wchdir(Path.w_str()) == -1){
 		BugReport(L"chdir "+Path+" got wrong");
 		return NULL;
@@ -79,13 +79,13 @@ TStringList* __fastcall Files::getFiles(String Path, String Ext){
 	x = _findfirst("*.*", &file);
 	temp = file.name;
 	if(temp.Pos(Ext))
-		strlist->Add(Path + "\\" + temp);
-
+		strlist->Add(temp);
 	while(_findnext(x,&file) == 0){
 		temp = file.name;
 		if(temp.Pos(Ext))
-			strlist->Add(Path + "\\" + temp);
+			strlist->Add(temp);
 	}
+	_wchdir(L"..");
 	return strlist;
 }
 void __fastcall Files::getFiles(String path, int layer){
