@@ -1,0 +1,8 @@
+#ifndef XMLH
+#define XMLH
+
+#include <vcl.h>
+#include <Xml.XMLDoc.hpp>
+#include "JunYeClass.h"
+
+#endif

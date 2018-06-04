@@ -1,0 +1,7 @@
+#ifndef C++BUILDERH
+#define C++BUILDERH
+
+#include <vcl.h>
+#include "JunYeClass.h"
+
+#endif

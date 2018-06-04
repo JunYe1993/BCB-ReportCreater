@@ -29,6 +29,16 @@ public :
 	void __fastcall DataReport(AnsiString filename, AnsiString msg);
 };
 
+class Files : public Common
+{
+private :
+	_FileData Dir;
+public :
+	Files();
+	TStringList* __fastcall getFiles(String Path, String Ext);
+	void __fastcall getFiles(String path, int layer);
+};
+
 class EN301489_Files : public Common
 {
 private :
@@ -44,7 +54,7 @@ public :
 	String __fastcall getModeName(int index);
 	String __fastcall getFile(int index);
 	String __fastcall getModeFile(int ModeIndex, int FileIndex);
-    void __fastcall sortMode();
+	void __fastcall sortMode();
 };
 
 class INI : public Common

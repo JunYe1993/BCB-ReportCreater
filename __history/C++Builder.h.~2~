@@ -1,0 +1,8 @@
+#ifndef C++BUILDERH
+#define C++BUILDERH
+
+#include <vcl.h>
+#include <Xml.XMLDoc.hpp>
+#include "JunYeClass.h"
+
+#endif

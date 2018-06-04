@@ -1,0 +1,70 @@
+#include "JunYeClass.h"
+
+void __fastcall INI::WriteInt(String category, String parameter, int value)
+{
+	TIniFile *IniFile;
+	IniFile = new TIniFile(ChangeFileExt(Application->ExeName, ".ini"));
+	IniFile->WriteInteger(category, parameter, value);
+	delete IniFile;
+}
+void __fastcall INI::WriteStr(String category, String parameter, String value)
+{
+	TIniFile *IniFile;
+	IniFile = new TIniFile(ChangeFileExt(Application->ExeName, ".ini"));
+	IniFile->WriteString(category, parameter, value);
+	delete IniFile;
+}
+void __fastcall INI::WriteBool(String category, String parameter, bool bobo)
+{
+	TIniFile *IniFile;
+	IniFile = new TIniFile(ChangeFileExt(Application->ExeName, ".ini"));
+	IniFile->WriteBool(category, parameter, bobo);
+	delete IniFile;
+}
+int  __fastcall INI::ReadInt(String category, String parameter)
+{
+	int value;
+	TIniFile *IniFile;
+	IniFile = new TIniFile(ChangeFileExt(Application->ExeName, ".ini"));
+	value = IniFile->ReadInteger(category, parameter, 0);
+	delete IniFile;
+	return value;
+}
+String __fastcall INI::ReadStr(String category, String parameter)
+{
+	String value;
+	TIniFile *IniFile;
+	IniFile = new TIniFile(ChangeFileExt(Application->ExeName, ".ini"));
+	value = IniFile->ReadString(category, parameter, value);
+	delete IniFile;
+	return value;
+}
+bool __fastcall INI::ReadBool(String category, String parameter)
+{
+	bool value = false;
+	TIniFile *IniFile;
+	IniFile = new TIniFile(ChangeFileExt(Application->ExeName, ".ini"));
+	value = IniFile->ReadBool(category, parameter, value);
+	delete IniFile;
+	return value;
+}
+void __fastcall INI::deleteSection(String category)
+{
+	TIniFile *IniFile;
+	IniFile = new TIniFile(ChangeFileExt(Application->ExeName, ".ini"));
+	IniFile->EraseSection(category);
+	delete IniFile;
+}
+bool __fastcall INI::checkSection(String category)
+{
+	TIniFile *IniFile;
+	IniFile = new TIniFile(ChangeFileExt(Application->ExeName, ".ini"));
+	bool bobo = IniFile->SectionExists(category);
+	delete IniFile;
+	return bobo;
+}
+void __fastcall INI::setFileMap(String FileName){
+	int value = ReadInt(__saveFileName, "Num");
+	WriteInt(__saveFileName, "Num", ++value);
+	WriteStr(__saveFileName, IntToStr(value), FileName);
+}

@@ -1,5 +1,4 @@
 #include "JunYeClass.h"
-#include "StringParameter.h"
 
 void __fastcall INI::WriteInt(String category, String parameter, int value)
 {
