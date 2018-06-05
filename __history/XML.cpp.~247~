@@ -476,3 +476,4 @@ String __fastcall XML::checkFirstLetter(String str){
 
 	return str;
 }
+

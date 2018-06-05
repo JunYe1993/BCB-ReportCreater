@@ -1,0 +1,78 @@
+#include "JunYeClass.h"
+
+void __fastcall JunYe_TValueListEditor::deleteAllRow(TValueListEditor* List){
+	int rowcount = List->RowCount;
+	if(rowcount > 1 && List->Keys[1] != ""){
+		for(int i = 1; i < rowcount; i++){
+			List->DeleteRow(1);
+		}
+	}
+}
+void __fastcall JunYe_TValueListEditor::saveAllRow(TValueListEditor* List, String Category){
+	int rowcount = List->RowCount;
+	if(rowcount > 1 && List->Keys[1] != ""){
+		for(int i = 1; i < rowcount; i++){
+			WriteStr(Category, List->Name + List->Keys[i], List->Values[List->Keys[i]]);
+		}
+	}
+}
+void __fastcall JunYe_TValueListEditor::saveAllRow_CommonVersion(TValueListEditor* List, String Category, String parameter){
+	int rowcount = List->RowCount;
+	if(rowcount > 1 && List->Keys[1] != ""){
+		for(int i = 1; i < rowcount; i++){
+			WriteStr(Category, parameter + List->Keys[i], List->Values[List->Keys[i]]);
+		}
+	}
+}
+void __fastcall JunYe_TValueListEditor::insertRow(TValueListEditor* List, String Category, String key){
+	String value = ReadStr(Category, List->Name + key);
+	List->InsertRow(key, value, true);
+}
+void __fastcall JunYe_TValueListEditor::insertRow_CommonVersion(TValueListEditor* List, String Category, String parameter,String key){
+	//String value = ReadStr(Category, List->Name + key);
+	//List->InsertRow(key, value, true);
+}
+void __fastcall JunYe_TValueListEditor::setDropList(TValueListEditor* List, int index, TStringList* li){
+    List->ItemProps[index]->EditStyle = esPickList;
+	List->ItemProps[index]->PickList = li;
+	List->ItemProps[index]->ReadOnly = true;
+}
+TStringList* __fastcall JunYe_TValueListEditor::getGender_Eng(){
+    TStringList *stringlist = new TStringList;
+	stringlist->Add("Male");
+	stringlist->Add("Female");
+	return stringlist;
+}
+TStringList* __fastcall JunYe_TValueListEditor::getGender_Chi(){
+    TStringList *stringlist = new TStringList;
+	stringlist->Add("¨k");
+	stringlist->Add("¤k");
+	return stringlist;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+void __fastcall JunYe_TCheckListBox::deleteAllRow(TCheckListBox* List){
+    int rowcount = List->Items->Count;
+	for(int i = 0; i < rowcount; i++){
+        List->Items->Delete(0);
+	}
+}
+void __fastcall JunYe_TCheckListBox::saveAllRow(TCheckListBox* List, String category){
+	int rowcount = List->Items->Count;
+	WriteInt(category, List->Name + "Num", rowcount);
+	for(int i = 0; i < rowcount; i++){
+		WriteStr(category, List->Name + IntToStr(i) + "1", List->Items->Strings[i]);
+		WriteBool(category, List->Name + IntToStr(i) + "2", List->Checked[i]);
+	}
+}
+void __fastcall JunYe_TCheckListBox::loadAllRow(TCheckListBox* List, String category){
+	int rowcount = ReadInt(category, List->Name + "Num");
+	for(int i = 0; i < rowcount; i++){
+		List->Items->Add(ReadStr(category, List->Name + IntToStr(i) + "1"));
+		List->Checked[i] = ReadBool(category, List->Name + IntToStr(i) + "2");
+	}
+}

@@ -12,7 +12,6 @@ XML::XML(String FileName){
 	}else{
 		xmlfile->LoadFromFile(filename);
 		xmlnode = xmlfile->GetDocumentElement();
-        BugReport("GGGGGGGGGGGGGGG");
 	}
 }
 TStringList* __fastcall XML::getXMLFiles(String Path){
@@ -477,3 +476,4 @@ String __fastcall XML::checkFirstLetter(String str){
 
 	return str;
 }
+

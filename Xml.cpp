@@ -110,8 +110,9 @@ void __fastcall XML::addChildInCurrentNode(String NodeName, bool intolayer){
 }
 void __fastcall XML::addChildInCurrentNode(String NodeName, String Value){
 	NodeName = checkFirstLetter(NodeName);
-	if(xmlnode->GetChildNodes()->FindNode(NodeName) == NULL)
+	if(xmlnode->GetChildNodes()->FindNode(NodeName) == NULL){
 		xmlnode->AddChild(NodeName);
+	}
 	xmlnode->SetChildValue(NodeName, Value);
 }
 void __fastcall XML::deleteAllChildInCurrentNode(){
@@ -463,6 +464,7 @@ String __fastcall XML::checkFirstLetter(String str){
 		str = StringReplace(str, L"-", L"_", rf);
 		str = StringReplace(str, L"(", L"_", rf);
 		str = StringReplace(str, L")", L"_", rf);
+		str = StringReplace(str, L"'", L"_", rf);
 		str = StringReplace(str, L"@", L"_", rf);
 	}
 	if(TryStrToInt(msg, value)){

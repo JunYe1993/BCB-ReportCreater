@@ -2,7 +2,8 @@
 
 XML::XML(String FileName){
 	struct _wffblk file;
-	filename = FileName + ".xml";
+	if(FileName.Pos(".xml")<1)
+		filename = FileName + ".xml";
 	xmlfile = NewXMLDocument();
 	if(_wfindfirst(filename.w_str(), &file, 0) == -1){
 		xmlfile->AddChild("root");
@@ -14,7 +15,7 @@ XML::XML(String FileName){
 	}
 }
 TStringList* __fastcall XML::getXMLFiles(String Path){
-	return getFiles(String Path, "xml");
+	return getFiles(Path, "xml");
 }
 void __fastcall XML::setLayer1Node(String NodeName, bool intoLayer){
 	NodeName = checkFirstLetter(NodeName);
@@ -109,8 +110,9 @@ void __fastcall XML::addChildInCurrentNode(String NodeName, bool intolayer){
 }
 void __fastcall XML::addChildInCurrentNode(String NodeName, String Value){
 	NodeName = checkFirstLetter(NodeName);
-	if(xmlnode->GetChildNodes()->FindNode(NodeName) == NULL)
+	if(xmlnode->GetChildNodes()->FindNode(NodeName) == NULL){
 		xmlnode->AddChild(NodeName);
+	}
 	xmlnode->SetChildValue(NodeName, Value);
 }
 void __fastcall XML::deleteAllChildInCurrentNode(){
@@ -475,3 +477,4 @@ String __fastcall XML::checkFirstLetter(String str){
 
 	return str;
 }
+
