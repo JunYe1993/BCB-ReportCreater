@@ -250,20 +250,6 @@ int __fastcall XML::getNodeIntValue(String Layer1NodeName, String Layer2NodeName
 	}
 	return 2147483647;
 }
-int __fastcall XML::getNodeIntValue(String Layer1NodeName, String Layer2NodeName, String Layer3NodeName, String Layer4NodeName, String Layer5NodeName){
-	int value;
-	if(getNode(Layer1NodeName, Layer2NodeName, Layer3NodeName, Layer4NodeName, Layer5NodeName)){
-		if(TryStrToInt(Trim(xmlnode->GetText()), value))
-			return value;
-		BugReport("Function Error : XML::getNodeIntValue");
-		BugReport("Can not translate to Int");
-		BugReport("----------------------------------------------------------");
-	}else{
-		BugReport("Function Error : XML::getNodeIntValue");
-		BugReport("----------------------------------------------------------");
-	}
-	return 2147483647;
-}
 bool __fastcall XML::getNodeBoolValue(){
 	if(xmlnode->GetText() != "0")
 		return true;
@@ -310,16 +296,6 @@ bool __fastcall XML::getNodeBoolValue(String Layer1NodeName, String Layer2NodeNa
 	}
 	return false;
 }
-bool __fastcall XML::getNodeBoolValue(String Layer1NodeName, String Layer2NodeName, String Layer3NodeName, String Layer4NodeName, String Layer5NodeName){
-	if(getNode(Layer1NodeName, Layer2NodeName, Layer3NodeName, Layer4NodeName, Layer5NodeName)){
-		if(xmlnode->GetText() != "0")
-			return true;
-	}else{
-		BugReport("Function Error : XML::getNodeBoolValue");
-		BugReport("----------------------------------------------------------");
-	}
-	return false;
-}
 String __fastcall XML::getNodeValue(){
 	if(xmlnode == NULL)
 		return NULL;
@@ -355,15 +331,6 @@ String __fastcall XML::getNodeValue(String Layer1NodeName, String Layer2NodeName
 }
 String __fastcall XML::getNodeValue(String Layer1NodeName, String Layer2NodeName, String Layer3NodeName, String Layer4NodeName){
 	if(getNode(Layer1NodeName, Layer2NodeName, Layer3NodeName, Layer4NodeName)){
-		return xmlnode->GetText();
-	}else{
-		BugReport("Function Error : XML::getNodeValue");
-		BugReport("----------------------------------------------------------");
-	}
-	return NULL;
-}
-String __fastcall XML::getNodeValue(String Layer1NodeName, String Layer2NodeName, String Layer3NodeName, String Layer4NodeName, String Layer5NodeName){
-	if(getNode(Layer1NodeName, Layer2NodeName, Layer3NodeName, Layer4NodeName, Layer5NodeName)){
 		return xmlnode->GetText();
 	}else{
 		BugReport("Function Error : XML::getNodeValue");

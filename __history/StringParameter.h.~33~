@@ -15,6 +15,7 @@ struct TempFile
 	int intarrayvalue[100][100];
 
 	int count;
+	int index;
 };
 
 #endif

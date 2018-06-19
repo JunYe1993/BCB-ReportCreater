@@ -4,7 +4,7 @@
 const String __SavePath = "Save\\";
 const String __NameCardPath = "NameCard\\";
 const String __PicturePath = "Pic\\";
-const String __PicturePasdsadh = "QSDDAD\\";
+
 
 struct TempFile
 {
@@ -15,6 +15,7 @@ struct TempFile
 	int intarrayvalue[100][100];
 
 	int count;
+    int index;
 };
 
 #endif

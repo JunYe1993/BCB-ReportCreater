@@ -90,6 +90,17 @@ bool __fastcall XML::getNode(String Layer1NodeName, String Layer2NodeName, Strin
 	}
 	return true;
 }
+bool __fastcall XML::getNode(String Layer1NodeName, String Layer2NodeName, String Layer3NodeName, String Layer4NodeName, String Layer5NodeName){
+	Layer5NodeName = checkFirstLetter(Layer5NodeName);
+	if(getNode(Layer1NodeName, Layer2NodeName, Layer3NodeName, Layer4NodeName)){
+		if(!getCurNodeChild(Layer5NodeName)){
+			BugReport("Function Error : XML::getNode");
+			BugReport("The Layer5NodeName ("+Layer5NodeName+") is not exist!!");
+			return false;
+		}
+	}
+	return true;
+}
 bool __fastcall XML::getNodeChild(int index){
 	if(getNodeChildCount() > 0){
 		xmlnode = xmlnode->GetChildNodes()->Get(index);
@@ -110,8 +121,9 @@ void __fastcall XML::addChildInCurrentNode(String NodeName, bool intolayer){
 }
 void __fastcall XML::addChildInCurrentNode(String NodeName, String Value){
 	NodeName = checkFirstLetter(NodeName);
-	if(xmlnode->GetChildNodes()->FindNode(NodeName) == NULL)
+	if(xmlnode->GetChildNodes()->FindNode(NodeName) == NULL){
 		xmlnode->AddChild(NodeName);
+	}
 	xmlnode->SetChildValue(NodeName, Value);
 }
 void __fastcall XML::deleteAllChildInCurrentNode(){
@@ -463,6 +475,8 @@ String __fastcall XML::checkFirstLetter(String str){
 		str = StringReplace(str, L"-", L"_", rf);
 		str = StringReplace(str, L"(", L"_", rf);
 		str = StringReplace(str, L")", L"_", rf);
+		str = StringReplace(str, L"'", L"_", rf);
+		str = StringReplace(str, L"/", L"_", rf);
 		str = StringReplace(str, L"@", L"_", rf);
 	}
 	if(TryStrToInt(msg, value)){
@@ -476,3 +490,4 @@ String __fastcall XML::checkFirstLetter(String str){
 
 	return str;
 }
+

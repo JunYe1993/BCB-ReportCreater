@@ -4,7 +4,8 @@
 const String __SavePath = "Save\\";
 const String __NameCardPath = "NameCard\\";
 const String __PicturePath = "Pic\\";
-const String __PicturePasdsadh = "QSDDAD\\";
+const String __AA = "QQQQQQQ\\";
+
 
 struct TempFile
 {
@@ -13,8 +14,8 @@ struct TempFile
 	bool boolvalue[100];
 	int intvalue[100];
 	int intarrayvalue[100][100];
-
 	int count;
+    int index;
 };
 
 #endif

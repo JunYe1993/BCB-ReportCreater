@@ -4,7 +4,6 @@ XML::XML(String FileName){
 	struct _wffblk file;
 	if(FileName.Pos(".xml")<1)
 		filename = FileName + ".xml";
-	BugReport(filename);
 	xmlfile = NewXMLDocument();
 	if(_wfindfirst(filename.w_str(), &file, 0) == -1){
 		xmlfile->AddChild("root");
@@ -91,6 +90,17 @@ bool __fastcall XML::getNode(String Layer1NodeName, String Layer2NodeName, Strin
 	}
 	return true;
 }
+bool __fastcall XML::getNode(String Layer1NodeName, String Layer2NodeName, String Layer3NodeName, String Layer4NodeName, String Layer5NodeName){
+	Layer5NodeName = checkFirstLetter(Layer5NodeName);
+	if(getNode(Layer1NodeName, Layer2NodeName, Layer3NodeName, Layer4NodeName)){
+		if(!getCurNodeChild(Layer5NodeName)){
+			BugReport("Function Error : XML::getNode");
+			BugReport("The Layer5NodeName ("+Layer5NodeName+") is not exist!!");
+			return false;
+		}
+	}
+	return true;
+}
 bool __fastcall XML::getNodeChild(int index){
 	if(getNodeChildCount() > 0){
 		xmlnode = xmlnode->GetChildNodes()->Get(index);
@@ -111,8 +121,9 @@ void __fastcall XML::addChildInCurrentNode(String NodeName, bool intolayer){
 }
 void __fastcall XML::addChildInCurrentNode(String NodeName, String Value){
 	NodeName = checkFirstLetter(NodeName);
-	if(xmlnode->GetChildNodes()->FindNode(NodeName) == NULL)
+	if(xmlnode->GetChildNodes()->FindNode(NodeName) == NULL){
 		xmlnode->AddChild(NodeName);
+	}
 	xmlnode->SetChildValue(NodeName, Value);
 }
 void __fastcall XML::deleteAllChildInCurrentNode(){
@@ -158,6 +169,15 @@ String __fastcall XML::getNodeName(String Layer1NodeName, String Layer2NodeName,
 }
 String __fastcall XML::getNodeName(String Layer1NodeName, String Layer2NodeName, String Layer3NodeName, String Layer4NodeName){
 	if(getNode(Layer1NodeName, Layer2NodeName, Layer3NodeName, Layer4NodeName)){
+		return checkFirstLetter(xmlnode->GetNodeName());
+	}else{
+		BugReport("Function Error : XML::getNodeName");
+		BugReport("----------------------------------------------------------");
+	}
+	return NULL;
+}
+String __fastcall XML::getNodeName(String Layer1NodeName, String Layer2NodeName, String Layer3NodeName, String Layer4NodeName, String Layer5NodeName){
+	if(getNode(Layer1NodeName, Layer2NodeName, Layer3NodeName, Layer4NodeName, Layer5NodeName)){
 		return checkFirstLetter(xmlnode->GetNodeName());
 	}else{
 		BugReport("Function Error : XML::getNodeName");
@@ -230,6 +250,20 @@ int __fastcall XML::getNodeIntValue(String Layer1NodeName, String Layer2NodeName
 	}
 	return 2147483647;
 }
+int __fastcall XML::getNodeIntValue(String Layer1NodeName, String Layer2NodeName, String Layer3NodeName, String Layer4NodeName, String Layer5NodeName){
+	int value;
+	if(getNode(Layer1NodeName, Layer2NodeName, Layer3NodeName, Layer4NodeName, Layer5NodeName)){
+		if(TryStrToInt(Trim(xmlnode->GetText()), value))
+			return value;
+		BugReport("Function Error : XML::getNodeIntValue");
+		BugReport("Can not translate to Int");
+		BugReport("----------------------------------------------------------");
+	}else{
+		BugReport("Function Error : XML::getNodeIntValue");
+		BugReport("----------------------------------------------------------");
+	}
+	return 2147483647;
+}
 bool __fastcall XML::getNodeBoolValue(){
 	if(xmlnode->GetText() != "0")
 		return true;
@@ -268,6 +302,16 @@ bool __fastcall XML::getNodeBoolValue(String Layer1NodeName, String Layer2NodeNa
 }
 bool __fastcall XML::getNodeBoolValue(String Layer1NodeName, String Layer2NodeName, String Layer3NodeName, String Layer4NodeName){
 	if(getNode(Layer1NodeName, Layer2NodeName, Layer3NodeName, Layer4NodeName)){
+		if(xmlnode->GetText() != "0")
+			return true;
+	}else{
+		BugReport("Function Error : XML::getNodeBoolValue");
+		BugReport("----------------------------------------------------------");
+	}
+	return false;
+}
+bool __fastcall XML::getNodeBoolValue(String Layer1NodeName, String Layer2NodeName, String Layer3NodeName, String Layer4NodeName, String Layer5NodeName){
+	if(getNode(Layer1NodeName, Layer2NodeName, Layer3NodeName, Layer4NodeName, Layer5NodeName)){
 		if(xmlnode->GetText() != "0")
 			return true;
 	}else{
@@ -464,6 +508,8 @@ String __fastcall XML::checkFirstLetter(String str){
 		str = StringReplace(str, L"-", L"_", rf);
 		str = StringReplace(str, L"(", L"_", rf);
 		str = StringReplace(str, L")", L"_", rf);
+		str = StringReplace(str, L"'", L"_", rf);
+		str = StringReplace(str, L"/", L"_", rf);
 		str = StringReplace(str, L"@", L"_", rf);
 	}
 	if(TryStrToInt(msg, value)){
@@ -477,3 +523,4 @@ String __fastcall XML::checkFirstLetter(String str){
 
 	return str;
 }
+
