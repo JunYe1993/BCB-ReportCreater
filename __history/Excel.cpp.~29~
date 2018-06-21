@@ -17,12 +17,12 @@ void __fastcall Excel::Open(String path){
 	Exc.WorkSheet = Exc.WorkSheets.OlePropertyGet("Item", 1);
 }
 void __fastcall Excel::Close(){
+	Timer(2000);
 	Exc.WorkBook.OleFunction("Close", false);
 	Exc.App.Exec(Procedure("Quit"));
 }
-void __fastcall Excel::Close_2(){
-	Exc.Range = Exc.WorkSheet.OlePropertyGet("Cells", 1, 1);
-    Exc.Range.OleFunction("Copy");
+void __fastcall Excel::Close_V2(unsigned long delay){
+	Timer(delay);
 	Exc.WorkBook.OleFunction("Close", false);
 	Exc.App.Exec(Procedure("Quit"));
 }

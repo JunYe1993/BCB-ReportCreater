@@ -1,0 +1,32 @@
+#include "JunYeClass.h"
+
+void __fastcall CommonFiles::iniFiles(String path){
+    MainPath = path;
+	checkFilePath(path);
+    Data = new _FileData();
+}
+void __fastcall CommonFiles::checkFilePath(String path){
+	FilePathExist = (_wchdir(path.w_str()) != -1);
+}
+void __fastcall CommonFiles::getFiles(String str, int layer){
+    //  implementation
+}
+void __fastcall CommonFiles::decodeFiles(){
+    //  implementation
+}
+
+void __fastcall CommonFiles::getFile(){
+	getFiles(MainPath, 0);
+	decodeFiles();
+}
+int __fastcall CommonFiles::getFileCount(){
+    return Data->Count;
+}
+String __fastcall CommonFiles::getFileName(int index){
+	return Data->Mark[index];
+}
+String __fastcall CommonFiles::getFileMark(int index){
+	return Data->Mark[index];
+}
+
+

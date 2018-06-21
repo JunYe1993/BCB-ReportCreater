@@ -60,9 +60,7 @@ protected :
 public :
 	bool FilePathExist;
 	void __fastcall getFile();
-	int  __fastcall getFileCount();
-	String __fastcall getFileName(int index);
-	String __fastcall getFileMark(int index);
+	int __fastcall getFileCount();
 };
 
 class Files : public Common
@@ -94,7 +92,7 @@ public :
 	void __fastcall sortMode();
 };
 
-/*class Excel : public Common
+class Excel : public Common
 {
 private :
 	_Excel Exc;
@@ -109,7 +107,7 @@ public :
 	String __fastcall getCellValue(int row, int column);
 };
 
-class JunYe_Word : public Common
+/*class JunYe_Word : public Common
 {
 private :
 	_Word Wd;

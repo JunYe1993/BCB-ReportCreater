@@ -20,12 +20,6 @@ void __fastcall Excel::Close(){
 	Exc.WorkBook.OleFunction("Close", false);
 	Exc.App.Exec(Procedure("Quit"));
 }
-void __fastcall Excel::Close_2(){
-	Exc.Range = Exc.WorkSheet.OlePropertyGet("Cells", 1, 1);
-    Exc.Range.OleFunction("Copy");
-	Exc.WorkBook.OleFunction("Close", false);
-	Exc.App.Exec(Procedure("Quit"));
-}
 
 bool __fastcall Excel::getWorkSheetbyName(String name){
 	try{
@@ -65,20 +59,6 @@ String __fastcall Excel::getCellValue(int row, int column){
 void __fastcall Excel::getDataRange(){
 
 	Exc.Range = Exc.WorkSheet.OlePropertyGet("Range",OleStr("A100"));
-	Exc.Cell1 = Exc.Range.OlePropertyGet("End", xlShiftUp);
-	Exc.PresentRangeCellRow = Exc.Cell1.OlePropertyGet("Row");
-
-	Exc.Range = Exc.WorkSheet.OlePropertyGet("Range",OleStr("Z1"));
-	Exc.Cell2 = Exc.Range.OlePropertyGet("End",xlShiftToLeft);
-	Exc.PresentRangeCellColumn = Exc.Cell2.OlePropertyGet("Column");
-
-	Exc.PresentRangeCell = Exc.WorkSheet.OlePropertyGet("Cells",Exc.PresentRangeCellRow,Exc.PresentRangeCellColumn);
-}
-void __fastcall Excel::getDataRange(int index){
-	String temp = "A100";
-
-    temp[1] += index - 1;
-	Exc.Range = Exc.WorkSheet.OlePropertyGet("Range",OleStr(temp));
 	Exc.Cell1 = Exc.Range.OlePropertyGet("End", xlShiftUp);
 	Exc.PresentRangeCellRow = Exc.Cell1.OlePropertyGet("Row");
 

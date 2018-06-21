@@ -21,8 +21,7 @@ void __fastcall Excel::Close(){
 	Exc.App.Exec(Procedure("Quit"));
 }
 void __fastcall Excel::Close_2(){
-	Exc.Range = Exc.WorkSheet.OlePropertyGet("Cells", 1, 1);
-    Exc.Range.OleFunction("Copy");
+	Timer(delay);
 	Exc.WorkBook.OleFunction("Close", false);
 	Exc.App.Exec(Procedure("Quit"));
 }

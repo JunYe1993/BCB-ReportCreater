@@ -17,7 +17,7 @@ public :
 	TStringList* __fastcall getGender_Chi();
 };
 
-class JunYe_TCheckListBox : protected INI, Common
+class JunYe_TCheckListBox : protected INI
 {
 protected :
 public :

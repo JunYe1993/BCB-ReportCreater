@@ -120,10 +120,9 @@ void __fastcall JunYe_Word::setInlineShapeWidth(int index, int width){
 String __fastcall JunYe_Word::getBookmark(int index){
 	return Wd.Bookmark[index];
 }
-bool  __fastcall JunYe_Word::getBookmark(String mark){
-	Wd.Range = Wd.ActiveDoc.OlePropertyGet("Bookmarks");
-	bool bobo = Wd.Range.OleFunction("Exists", OleStr(mark));
-	return bobo;
+bool  __fastcall getBookmark(String mark){
+	Wd.Range = Wd.ActiveDoc.OlePropertyGet("BookMarks");
+	return Wd.Range.OleFunction("Exist", mark);
 }
 int __fastcall JunYe_Word::getBookmarkCount(){
 	return Wd.BookmarkCount;
@@ -166,9 +165,6 @@ void __fastcall JunYe_Word::copy(){
 }
 void __fastcall JunYe_Word::paste(){
 	Wd.Range.OleFunction("PasteAppendTable");
-}
-void __fastcall JunYe_Word::paste_2(){
-	Wd.Range.OleFunction("Paste");
 }
 void __fastcall JunYe_Word::gotoNext(){
 	Wd.Range = Wd.Range.OleFunction("Next");

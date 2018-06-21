@@ -48,7 +48,7 @@ void __fastcall Common::BugReport(AnsiString msg)
 	fprintf(fp, "%s\n", msg);
 	fclose(fp);
 }
-void __fastcall Common::BugReport(AnsiString filename, AnsiString msg)
+void __fastcall Common::DataReport(AnsiString filename, AnsiString msg)
 {
 	AnsiString Path = ExtractFilePath(Application->ExeName);
 	Path.cat_sprintf("%s.txt", filename.c_str());

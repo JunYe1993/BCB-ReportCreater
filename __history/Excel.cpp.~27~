@@ -17,12 +17,7 @@ void __fastcall Excel::Open(String path){
 	Exc.WorkSheet = Exc.WorkSheets.OlePropertyGet("Item", 1);
 }
 void __fastcall Excel::Close(){
-	Exc.WorkBook.OleFunction("Close", false);
-	Exc.App.Exec(Procedure("Quit"));
-}
-void __fastcall Excel::Close_2(){
-	Exc.Range = Exc.WorkSheet.OlePropertyGet("Cells", 1, 1);
-    Exc.Range.OleFunction("Copy");
+    Timer(1000);
 	Exc.WorkBook.OleFunction("Close", false);
 	Exc.App.Exec(Procedure("Quit"));
 }

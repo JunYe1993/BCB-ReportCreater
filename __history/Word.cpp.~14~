@@ -167,8 +167,8 @@ void __fastcall JunYe_Word::copy(){
 void __fastcall JunYe_Word::paste(){
 	Wd.Range.OleFunction("PasteAppendTable");
 }
-void __fastcall JunYe_Word::paste_2(){
-	Wd.Range.OleFunction("Paste");
+void __fastcall JunYe_Word::paste(){
+	Wd.Range.OleFunction("PasteAppendTable");
 }
 void __fastcall JunYe_Word::gotoNext(){
 	Wd.Range = Wd.Range.OleFunction("Next");

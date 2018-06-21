@@ -123,6 +123,7 @@ String __fastcall JunYe_Word::getBookmark(int index){
 bool  __fastcall JunYe_Word::getBookmark(String mark){
 	Wd.Range = Wd.ActiveDoc.OlePropertyGet("Bookmarks");
 	bool bobo = Wd.Range.OleFunction("Exists", OleStr(mark));
+	BugReport(mark);
 	return bobo;
 }
 int __fastcall JunYe_Word::getBookmarkCount(){
@@ -166,9 +167,6 @@ void __fastcall JunYe_Word::copy(){
 }
 void __fastcall JunYe_Word::paste(){
 	Wd.Range.OleFunction("PasteAppendTable");
-}
-void __fastcall JunYe_Word::paste_2(){
-	Wd.Range.OleFunction("Paste");
 }
 void __fastcall JunYe_Word::gotoNext(){
 	Wd.Range = Wd.Range.OleFunction("Next");

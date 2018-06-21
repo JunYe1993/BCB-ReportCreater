@@ -30,7 +30,7 @@ int  __fastcall INI::ReadInt(String category, String parameter)
 	delete IniFile;
 	return value;
 }
-int  __fastcall INI::ReadInt(String category, String parameter, int defaultint)
+int  __fastcall INI::ReadInt_Default(String category, String parameter, int defaultint)
 {
 	int value;
 	TIniFile *IniFile;
@@ -48,7 +48,7 @@ String __fastcall INI::ReadStr(String category, String parameter)
 	delete IniFile;
 	return value;
 }
-String  __fastcall INI::ReadStr(String category, String parameter, String defaultstr){
+String  __fastcall INI::ReadStr_Default(String category, String parameter, String defaultstr){
 	String value;
 	TIniFile *IniFile;
 	IniFile = new TIniFile(ChangeFileExt(Application->ExeName, ".ini"));
@@ -66,7 +66,7 @@ bool __fastcall INI::ReadBool(String category, String parameter)
 	delete IniFile;
 	return value;
 }
-bool __fastcall INI::ReadBool(String category, String parameter, bool defaultbool)
+bool __fastcall INI::ReadBool_Default(String category, String parameter, bool defaultbool)
 {
 	bool value = false;
 	TIniFile *IniFile;

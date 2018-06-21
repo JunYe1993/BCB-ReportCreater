@@ -3,23 +3,6 @@
 
 #include "Comobj.hpp"
 
-//XIDeleteShiftDirection
-const int xlDown = -4121;
-const int xlShiftToLeft = -4159;
-const int xlToRight = -4161;
-const int xlShiftUp = -4162;
-
-//XIHAlign
-const int xlCenter = -4108;
-const int xlCenterAcrossSelection = 7;
-const int xlDistributed = -4117;
-const int xlFill = 5;
-const int xlGeneral = 1;
-const int xlJustify = -4130;
-const int xlLeft = -4131;
-const int xlRight = -4152;
-
-//Wd Colors
 const int wdAuto = 0;			//自動套色，通常預設為黑色。
 const int wdBlack = 1;			//黑色。
 const int wdBlue = 2;			//藍色。
@@ -68,8 +51,6 @@ struct _Excel
 	Variant Cell1;
 	Variant Cell2;
 	Variant PresentRangeCell;
-	int PresentRangeCellRow;
-	int PresentRangeCellColumn;
 };
 
 struct _Word
