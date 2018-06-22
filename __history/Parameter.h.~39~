@@ -1,6 +1,8 @@
 #ifndef PARAMETERH
 #define PARAMETERH
 
+#include "Comobj.hpp"
+
 struct _FileData{
 	String Name[200];
 	String Mark[200];

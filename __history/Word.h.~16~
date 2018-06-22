@@ -2,6 +2,7 @@
 #define WORDH
 
 #include "JunYeClass.h"
+#include "Parameter.h"
 
 class Common;
 class JunYe_Word : public Common
@@ -9,7 +10,7 @@ class JunYe_Word : public Common
 private :
 	_Word Wd;
 	void __fastcall getMarks();
-	String __fastcall getBookmark(int index);
+
 public :
 	JunYe_Word();
 	void __fastcall Open(String path);
@@ -34,6 +35,8 @@ public :
 	void __fastcall setInlineShapeHeight(int index, int height);
 	void __fastcall setInlineShapeWidth(int index, int width);
 
+	String __fastcall getBookmark(int index);
+    bool __fastcall getBookmark(String mark);
 	int  __fastcall getBookmarkCount();
 	void __fastcall gotoBookmark(String mark);
 	void __fastcall setfontName(String name);
@@ -46,6 +49,7 @@ public :
     void __fastcall deleteRange();
 	void __fastcall copy();
 	void __fastcall paste();
+	void __fastcall paste_2();
 	void __fastcall gotoNext();
 	void __fastcall insertPageBreak();
 	// Data Word

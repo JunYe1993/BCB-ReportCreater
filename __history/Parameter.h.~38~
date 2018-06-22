@@ -1,6 +1,10 @@
 #ifndef PARAMETERH
 #define PARAMETERH
 
+#include "Comobj.hpp"
+
+
+
 struct _FileData{
 	String Name[200];
 	String Mark[200];
@@ -18,5 +22,9 @@ struct __FileData
 	int ModesMap[300][50];
 	int ModesCount;
 };
+
+
+
+
 
 #endif

@@ -7,9 +7,9 @@
 #include "inifiles.hpp"
 
 #include <vcl.h>
-#include <Vcl.ValEdit.hpp>
-#include <Vcl.CheckLst.hpp>
-#include <Xml.XMLDoc.hpp>
+//#include <Vcl.ValEdit.hpp>
+//#include <Vcl.CheckLst.hpp>
+//#include <Xml.XMLDoc.hpp>
 
 #include "Parameter.h"
 
@@ -56,10 +56,13 @@ protected :
 	void __fastcall iniFiles(String path);
 	void __fastcall checkFilePath(String path);
 	virtual void __fastcall getFiles(String str, int layer);
+	virtual void __fastcall decodeFiles();
 public :
 	bool FilePathExist;
 	void __fastcall getFile();
-
+	int  __fastcall getFileCount();
+	String __fastcall getFileName(int index);
+	String __fastcall getFileMark(int index);
 };
 
 class Files : public Common
@@ -91,7 +94,7 @@ public :
 	void __fastcall sortMode();
 };
 
-class Excel : public Common
+/*class Excel : public Common
 {
 private :
 	_Excel Exc;
@@ -154,6 +157,6 @@ public :
 	// Data Word
 	bool __fastcall getDataTable(int index);
 	int  __fastcall test();
-};
+};*/
 
 #endif

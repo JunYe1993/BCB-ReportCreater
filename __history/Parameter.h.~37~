@@ -3,6 +3,7 @@
 
 #include "Comobj.hpp"
 
+//Wd Colors
 const int wdAuto = 0;			//自動套色，通常預設為黑色。
 const int wdBlack = 1;			//黑色。
 const int wdBlue = 2;			//藍色。
@@ -23,9 +24,9 @@ const int wdWhite = 8;			//白色。
 const int wdYellow = 7;			//黃色。
 
 struct _FileData{
-	String Name[100];
-	String Mark[100];
-    int count
+	String Name[200];
+	String Mark[200];
+    int Count;
 };
 
 struct __FileData
@@ -51,6 +52,8 @@ struct _Excel
 	Variant Cell1;
 	Variant Cell2;
 	Variant PresentRangeCell;
+	int PresentRangeCellRow;
+	int PresentRangeCellColumn;
 };
 
 struct _Word

@@ -2,6 +2,8 @@
 #define CPPBUILDERH
 
 #include "JunYeClass.h"
+#include <Vcl.ValEdit.hpp>
+#include <Vcl.CheckLst.hpp>
 
 class INI;
 class JunYe_TValueListEditor : protected INI

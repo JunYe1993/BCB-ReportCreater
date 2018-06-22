@@ -1,7 +1,9 @@
 #ifndef WORDH
 #define WORDH
 
+#include "Comobj.hpp"
 #include "JunYeClass.h"
+#include "WordParameter.h"
 
 class Common;
 class JunYe_Word : public Common

@@ -5,12 +5,7 @@
 #include <direct.h>
 #include <io.h>
 #include "inifiles.hpp"
-
 #include <vcl.h>
-#include <Vcl.ValEdit.hpp>
-#include <Vcl.CheckLst.hpp>
-#include <Xml.XMLDoc.hpp>
-
 #include "Parameter.h"
 
 using namespace std;
