@@ -103,7 +103,6 @@ bool __fastcall Excel::addWorkSheet(){
 		BugReport(L"Add Worksheet fail");
 		return false;
 	}
-	getCell(1,1);
 	return true;
 }
 bool __fastcall Excel::getWorkSheet(int index){

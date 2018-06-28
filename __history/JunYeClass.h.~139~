@@ -68,7 +68,6 @@ public :
 	Files();
 	TStringList* __fastcall getFiles(String Path, String Ext);
 	void __fastcall getFiles(String path, int layer);
-    void __fastcall resetCurPath();
 };
 
 class EN301489_Files : public Common

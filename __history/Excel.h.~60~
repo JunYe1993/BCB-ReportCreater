@@ -26,7 +26,6 @@ public :
 	bool __fastcall getWorkSheet(int index);
 	bool __fastcall getWorkSheet(String name);
 	bool __fastcall getWorkSheetCopy(String name);
-    bool __fastcall changeWorkSheetName(String name);
 
 	bool __fastcall getCell(int row, int col);
 	String __fastcall getCellValue(int row, int column);

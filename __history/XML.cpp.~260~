@@ -16,7 +16,7 @@ XML::XML(String FileName){
 }
 TStringList* __fastcall XML::getXMLFiles(String Path){
 	TStringList *strlist = getFiles(Path, "xml");
-    resetCurPath();
+
 	return strlist;
 }
 void __fastcall XML::setLayer1Node(String NodeName, bool intoLayer){
@@ -124,8 +124,7 @@ void __fastcall XML::addChildInCurrentNode(String NodeName, bool intolayer){
 void __fastcall XML::addChildInCurrentNode(String NodeName, String Value){
 	NodeName = checkFirstLetter(NodeName);
 	if(xmlnode->GetChildNodes()->FindNode(NodeName) == NULL){
-		xmlnode->AddChild(NodeName, xmlnode->GetChildNodes()->Count);
-		//xmlnode->AddChild(NodeName);
+		xmlnode->AddChild(NodeName);
 	}
 	xmlnode->SetChildValue(NodeName, Value);
 }

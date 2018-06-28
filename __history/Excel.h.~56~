@@ -26,7 +26,6 @@ public :
 	bool __fastcall getWorkSheet(int index);
 	bool __fastcall getWorkSheet(String name);
 	bool __fastcall getWorkSheetCopy(String name);
-    bool __fastcall changeWorkSheetName(String name);
 
 	bool __fastcall getCell(int row, int col);
 	String __fastcall getCellValue(int row, int column);
@@ -38,8 +37,7 @@ public :
 	bool __fastcall setRangeValue(String name, String value);
 	int  __fastcall searchValueInColumn(int ColumnIndex, String Value);
 	bool __fastcall getAllDataCopy();
-	bool __fastcall getAllDataCopy(int row1, int col1, int row2, int col2);
-	bool __fastcall paste();
+	bool __fastcall getAllDataCopy(int row1, int col1, int row2, int col2)
 	bool __fastcall pasteColumnWidth();
 
     //virtual void __fastcall getData();

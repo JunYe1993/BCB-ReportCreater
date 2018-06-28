@@ -103,7 +103,6 @@ bool __fastcall Excel::addWorkSheet(){
 		BugReport(L"Add Worksheet fail");
 		return false;
 	}
-	getCell(1,1);
 	return true;
 }
 bool __fastcall Excel::getWorkSheet(int index){
@@ -130,12 +129,7 @@ bool __fastcall Excel::getWorkSheetCopy(String name){
 	}return false;
 }
 bool __fastcall Excel::changeWorkSheetName(String name){
-	try{
-		Exc.WorkSheet.OlePropertySet("Name", OleStr(name));
-	}catch(EOleSysError *e){
-		BugReport(L"Change WorkSheet Name fail");
-        return false;
-	}return true;
+	Exc.WorkSheet.OlePropertySet("Name", OleStr(name));
 }
 
 
@@ -227,8 +221,7 @@ bool __fastcall Excel::paste(){
 	return true;
 }
 bool __fastcall Excel::pasteColumnWidth(){
-	Exc.Range.OleFunction("PasteSpecial", xlPasteColumnWidths);
-	paste();
+    Exc.Range.OleFunction("PasteSpecial", xlPasteColumnWidths);
 	return true;
 }
 

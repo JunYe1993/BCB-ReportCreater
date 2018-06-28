@@ -89,7 +89,6 @@ TStringList* __fastcall Files::getFiles(String Path, String Ext){
 	return strlist;
 }
 void __fastcall Files::resetCurPath(){
-	String temp = ExtractFilePath(Application->ExeName);
-	_wchdir(temp.w_str());
+	_wchdir(ExtractFilePath(Application->ExeName));
 }
 
