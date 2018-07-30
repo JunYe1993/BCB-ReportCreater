@@ -103,6 +103,7 @@ bool __fastcall Excel::addWorkSheet(){
 		BugReport(L"Add Worksheet fail");
 		return false;
 	}
+	getRange(1,1);
 	return true;
 }
 bool __fastcall Excel::getWorkSheet(int index){
@@ -129,20 +130,43 @@ bool __fastcall Excel::getWorkSheetCopy(String name){
 	}return false;
 }
 bool __fastcall Excel::changeWorkSheetName(String name){
-	Exc.WorkSheet.OlePropertySet("Name", OleStr(name));
-}
-
-
-
-bool __fastcall Excel::getCell(int row, int col){
-    try{
-		Exc.Range = Exc.WorkSheet.OlePropertyGet("Cells", row, col);
+	try{
+		Exc.WorkSheet.OlePropertySet("Name", OleStr(name));
 	}catch(EOleSysError *e){
-		BugReport(L"Get Cell fail");
+		BugReport(L"Change WorkSheet Name fail");
         return false;
 	}return true;
 }
-String __fastcall Excel::getCellValue(int row, int column){
+bool __fastcall Excel::deleteWorkSheet(){
+	Exc.App.OlePropertySet("DisplayAlerts", false);
+	try{
+		Exc.WorkSheet.OleFunction("Delete");
+	}catch(EOleSysError *e){
+		BugReport(L"Delete WorkSheet Name fail");
+		return false;
+	}
+    Exc.App.OlePropertySet("DisplayAlerts", true);
+	return true;
+}
+bool __fastcall Excel::getWorksheetOLEObject(int index){
+	Exc.Range = Exc.WorkSheet.OleFunction("OLEObjects", index);
+	String temp = Exc.Range.OlePropertyGet("Name");
+	BugReport("Name : " + temp);
+	temp = Exc.Range.OlePropertyGet("Object").OlePropertyGet("Value");
+	BugReport("Value : " + temp);
+	return true;
+}
+bool __fastcall Excel::getWorksheetOLEObject(String name){
+	Exc.Range = Exc.WorkSheet.OleFunction("OLEObjects").OleFunction("Item", OleStr(name));
+	String temp = Exc.Range.OlePropertyGet("Object").OlePropertyGet("Value");
+	BugReport("Value : " + temp);
+	return true;
+}
+
+
+
+
+String __fastcall Excel::getRangeValue(int row, int column){
 	String data;
 	Variant temp;
 	try{
@@ -156,18 +180,53 @@ String __fastcall Excel::getCellValue(int row, int column){
 	}
 	return data;
 }
-String __fastcall Excel::getCellValue(String name){
+String __fastcall Excel::getRangeValue(String name){
+	String data;
+	Variant temp;
+	if(getRange(name)){
+        try{
+			temp = Exc.Range.OlePropertyGet("Value");
+			if(VarType(temp) != varError){
+				data = temp;
+                return data;
+			}
+		}catch(EOleSysError *e){
+			BugReport(L"The Cell Can't transmit to OleStr");
+		}
+	}
 	return NULL;
 }
-
+bool __fastcall Excel::getRange(int row, int col){
+    try{
+		Exc.Range = Exc.WorkSheet.OlePropertyGet("Cells", row, col);
+	}catch(EOleSysError *e){
+		BugReport(L"Get Cell fail");
+        return false;
+	}return true;
+}
 bool __fastcall Excel::getRange(String name){
 	try{
 		Exc.Range = Exc.WorkSheet.OlePropertyGet("Range", OleStr(name));
 	}catch(EOleSysError *e){
+        BugReport(name);
 		BugReport(L"Request Range doesn't exit");
 		return false;
 	}
 	return true;
+}
+bool __fastcall Excel::getAboveRange(String name, int index){
+	if(getRange(name)){
+		int row = Exc.Range.OlePropertyGet("Row");
+		int col = Exc.Range.OlePropertyGet("Column");
+		if(row - index > 0){
+			getRange(row-index, col);
+            return true;
+		}else{
+			BugReport("getAboveRange Out of Range");
+			return false;
+		}
+	}
+    return false;
 }
 bool __fastcall Excel::getRangeCopy(String name){
 	if(getRange(name)){
@@ -175,6 +234,16 @@ bool __fastcall Excel::getRangeCopy(String name){
 		return true;
 	}
 	return false;
+}
+bool __fastcall Excel::setRangeValue(String value){
+	try{
+		Exc.Range.OlePropertySet("Value", OleStr(value));
+	}catch(EOleSysError *e){
+        BugReport(value);
+		BugReport(L"Set Range Value fail");
+		return false;
+	}
+	return true;
 }
 bool __fastcall Excel::setRangeValue(String name, String value){
 	try{
@@ -186,6 +255,27 @@ bool __fastcall Excel::setRangeValue(String name, String value){
 	Exc.Range.OlePropertySet("Value", OleStr(value));
 	return true;
 }
+bool __fastcall Excel::setAboveRangeValue(String name, int index, String value){
+	if(getAboveRange(name, index)){
+		Exc.Range.OlePropertySet("Value", OleStr(value));
+        return true;
+	}
+    return false;
+}
+bool __fastcall Excel::setRangeColor(int ColorIndex){
+	Exc.Range.OlePropertyGet("Interior").OlePropertySet("ColorIndex", ColorIndex);
+	return true;
+}
+
+
+
+
+
+
+
+
+
+
 
 
 int __fastcall Excel::searchValueInColumn(int ColumnIndex, String Value){
@@ -195,6 +285,16 @@ int __fastcall Excel::searchValueInColumn(int ColumnIndex, String Value){
 	temp = Exc.Range.OleFunction("Find", OleStr(Value)).OlePropertyGet("Item", 1);
 	BugReport("Row = " + temp.OlePropertyGet("Row"));
 	return temp.OlePropertyGet("Row");
+}
+bool __fastcall Excel::insertRow(String Range){
+	if(getRange(Range)){
+        int row = Exc.Range.OlePropertyGet("Row");
+		Exc.Range = Exc.WorkSheet.OlePropertyGet("Rows", row);
+        Exc.Range.OleFunction("Copy");
+		Exc.Range.OleFunction("Insert");
+		return true;
+	}
+    return false;
 }
 bool __fastcall Excel::getAllDataCopy(){
 	getAllDataRange();
@@ -221,7 +321,8 @@ bool __fastcall Excel::paste(){
 	return true;
 }
 bool __fastcall Excel::pasteColumnWidth(){
-    Exc.Range.OleFunction("PasteSpecial", xlPasteColumnWidths);
+	Exc.Range.OleFunction("PasteSpecial", xlPasteColumnWidths);
+	paste();
 	return true;
 }
 

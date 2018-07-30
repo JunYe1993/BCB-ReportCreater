@@ -116,9 +116,13 @@ bool __fastcall XML::getNodeChild(int index){
 void __fastcall XML::addChildInCurrentNode(String NodeName, bool intolayer){
 	NodeName = checkFirstLetter(NodeName);
 	if(xmlnode->GetChildNodes()->FindNode(NodeName) == NULL){
-		xmlnode = xmlnode->AddChild(NodeName);
+		if(intolayer)
+			xmlnode = xmlnode->AddChild(NodeName);
+		else
+			xmlnode->AddChild(NodeName);
 	}else{
-		xmlnode = xmlnode->GetChildNodes()->FindNode(NodeName);
+		if(intolayer)
+			xmlnode = xmlnode->GetChildNodes()->FindNode(NodeName);
 	}
 }
 void __fastcall XML::addChildInCurrentNode(String NodeName, String Value){

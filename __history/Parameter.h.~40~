@@ -2,8 +2,8 @@
 #define PARAMETERH
 
 struct _FileData{
-	String Name[500];
-	String Mark[500];
+	String Name[200];
+	String Mark[200];
     int Count;
 };
 

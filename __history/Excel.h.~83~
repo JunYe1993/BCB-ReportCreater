@@ -47,7 +47,6 @@ public :
 
 	int  __fastcall searchValueInColumn(int ColumnIndex, String Value);
 	bool __fastcall insertRow(String Range);
-	bool __fastcall insertCopy(String Range, int RowNum);
 
 	bool __fastcall getAllDataCopy();
 	bool __fastcall getAllDataCopy(int row1, int col1, int row2, int col2);
