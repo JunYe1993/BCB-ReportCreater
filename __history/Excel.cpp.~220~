@@ -129,6 +129,12 @@ bool __fastcall Excel::getWorkSheetCopy(String name){
 		return true;
 	}return false;
 }
+bool __fastcall Excel::setWorkSheetvisible(String name, bool visible){
+	if(getWorkSheet(name)){
+		Exc.WorkSheet.OlePropertySet("Visible", visible);
+		return true;
+	}return false;
+}
 bool __fastcall Excel::changeWorkSheetName(String name){
 	try{
 		Exc.WorkSheet.OlePropertySet("Name", OleStr(name));
@@ -257,7 +263,8 @@ bool __fastcall Excel::setRangeValue(String name, String value){
 }
 bool __fastcall Excel::setAboveRangeValue(String name, int index, String value){
 	if(getAboveRange(name, index)){
-
+		Exc.Range.OlePropertySet("Value", OleStr(value));
+        return true;
 	}
     return false;
 }
@@ -289,7 +296,18 @@ bool __fastcall Excel::insertRow(String Range){
 	if(getRange(Range)){
         int row = Exc.Range.OlePropertyGet("Row");
 		Exc.Range = Exc.WorkSheet.OlePropertyGet("Rows", row);
-		Exc.Range.OleFunction("Insert");
+        Exc.Range.OleFunction("Copy");
+		Exc.Range.OleFunction("Insert", xlDown);
+		return true;
+	}
+    return false;
+}
+bool __fastcall Excel::insertCopy(String Range, int RowNum){
+	if(getRange(Range)){
+        int row = Exc.Range.OlePropertyGet("Row");
+		Exc.Range.OleFunction("Copy");
+		Exc.Range = Exc.WorkSheet.OlePropertyGet("Rows", row+RowNum);
+		Exc.Range.OleFunction("Insert", xlDown);
 		return true;
 	}
     return false;

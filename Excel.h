@@ -26,6 +26,7 @@ public :
 	bool __fastcall getWorkSheet(int index);
 	bool __fastcall getWorkSheet(String name);
 	bool __fastcall getWorkSheetCopy(String name);
+	bool __fastcall setWorkSheetVisible(String name, bool visible);
 	bool __fastcall changeWorkSheetName(String name);
 	bool __fastcall deleteWorkSheet();
 	bool __fastcall getWorksheetOLEObject(int index);

@@ -26,6 +26,7 @@ public :
 	bool __fastcall getWorkSheet(int index);
 	bool __fastcall getWorkSheet(String name);
 	bool __fastcall getWorkSheetCopy(String name);
+	bool __fastcall setWorkSheetvisible(String name, bool visible);
 	bool __fastcall changeWorkSheetName(String name);
 	bool __fastcall deleteWorkSheet();
 	bool __fastcall getWorksheetOLEObject(int index);
@@ -36,15 +37,18 @@ public :
 	String __fastcall getRangeValue(String name);
     bool __fastcall getRange(int row, int col);
 	bool __fastcall getRange(String name);
+	bool __fastcall getAboveRange(String name, int index);
 	bool __fastcall getRangeCopy(String name);
-    bool __fastcall setRangeValue(String value);
+	bool __fastcall setRangeValue(String value);
 	bool __fastcall setRangeValue(String name, String value);
-    bool __fastcall setRangeColor(int ColorIndex);
+	bool __fastcall setAboveRangeValue(String name, int index, String value);
+	bool __fastcall setRangeColor(int ColorIndex);
 
 
 
 	int  __fastcall searchValueInColumn(int ColumnIndex, String Value);
 	bool __fastcall insertRow(String Range);
+	bool __fastcall insertCopy(String Range, int RowNum);
 
 	bool __fastcall getAllDataCopy();
 	bool __fastcall getAllDataCopy(int row1, int col1, int row2, int col2);

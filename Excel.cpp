@@ -129,6 +129,12 @@ bool __fastcall Excel::getWorkSheetCopy(String name){
 		return true;
 	}return false;
 }
+bool __fastcall Excel::setWorkSheetVisible(String name, bool visible){
+	if(getWorkSheet(name)){
+		Exc.WorkSheet.OlePropertySet("Visible", visible);
+		return true;
+	}return false;
+}
 bool __fastcall Excel::changeWorkSheetName(String name){
 	try{
 		Exc.WorkSheet.OlePropertySet("Name", OleStr(name));
