@@ -1,11 +1,6 @@
 #ifndef WORDPARAMETERH
 #define WORDPARAMETERH
 
-//Wd AlertLevel
-const int wdAlertsAll = -1;			//All message boxes and alerts are displayed; errors are returned to the macro.
-const int wdAlertsMessageBox = -2;  //Only message boxes are displayed; errors are trapped and returned to the macro.
-const int wdAlertsNone = 0;			//No alerts or message boxes are displayed. If a macro encounters a message box, the default value is chosen and the macro continues.
-
 //Wd Colors
 const int wdAuto = 0;			//自動套色，通常預設為黑色。
 const int wdBlack = 1;			//黑色。

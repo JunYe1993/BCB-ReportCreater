@@ -15,13 +15,14 @@ void __fastcall Common::SortDouble(vector<double> &nums, int left, int right)
 		SortDouble(nums, r+1, right);
 	}
 }
-void __fastcall Common::Timer(unsigned long x){
+bool __fastcall Common::Timer(unsigned long x){
 	long Time;
 	Time = GetTickCount();
 	while((GetTickCount() - Time) < x){
 		if((GetTickCount() - Time) <= 0)
 			Time = GetTickCount();
 	}
+    return true;
 }
 void __fastcall Common::CreateReportpath(){
 	_wmkdir(L"Report");

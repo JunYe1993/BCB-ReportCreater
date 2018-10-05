@@ -15,7 +15,7 @@ class Common
 protected :
 public :
 	void __fastcall SortDouble(vector<double> &nums, int left, int right);
-	void __fastcall Timer(unsigned long x);
+	bool __fastcall Timer(unsigned long x);
 	void __fastcall CreateReportpath();
 	void __fastcall CreateReportpath(String str);
 	void __fastcall initBugReport();

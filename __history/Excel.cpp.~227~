@@ -89,10 +89,21 @@ void __fastcall Excel::Close(){
 	Exc.App.Exec(Procedure("Quit"));
 }
 void __fastcall Excel::Close_2(){
-	Exc.Range = Exc.WorkSheet.OlePropertyGet("Cells", 1, 1);
-    Exc.Range.OleFunction("Copy");
-	Exc.WorkBook.OleFunction("Close", false);
-	Exc.App.Exec(Procedure("Quit"));
+	do{
+        try{
+			Exc.Range = Exc.WorkSheet.OlePropertyGet("Cells", 1, 1);
+			Exc.Range.OleFunction("Copy");
+			Exc.WorkBook.OleFunction("Close", false);
+			Exc.App.Exec(Procedure("Quit"));
+			return;
+		}catch(EOleSysError *e){
+			if(e->ErrorCode == -2147418111){
+				BugReport("Close_2 error, keep retry...");
+			}else{
+				throw;
+			}
+		}
+	}while(1);
 }
 
 
@@ -126,6 +137,12 @@ bool __fastcall Excel::getWorkSheet(String name){
 bool __fastcall Excel::getWorkSheetCopy(String name){
 	if(getWorkSheet(name)){
 		Exc.WorkSheets.OleFunction("Copy");
+		return true;
+	}return false;
+}
+bool __fastcall Excel::setWorkSheetVisible(String name, bool visible){
+	if(getWorkSheet(name)){
+		Exc.WorkSheet.OlePropertySet("Visible", visible);
 		return true;
 	}return false;
 }
@@ -291,7 +308,17 @@ bool __fastcall Excel::insertRow(String Range){
         int row = Exc.Range.OlePropertyGet("Row");
 		Exc.Range = Exc.WorkSheet.OlePropertyGet("Rows", row);
         Exc.Range.OleFunction("Copy");
-		Exc.Range.OleFunction("Insert");
+		Exc.Range.OleFunction("Insert", xlDown);
+		return true;
+	}
+    return false;
+}
+bool __fastcall Excel::insertCopy(String Range, int RowNum){
+	if(getRange(Range)){
+        int row = Exc.Range.OlePropertyGet("Row");
+		Exc.Range.OleFunction("Copy");
+		Exc.Range = Exc.WorkSheet.OlePropertyGet("Rows", row+RowNum);
+		Exc.Range.OleFunction("Insert", xlDown);
 		return true;
 	}
     return false;

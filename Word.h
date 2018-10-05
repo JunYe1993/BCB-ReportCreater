@@ -39,7 +39,7 @@ public :
 	String __fastcall getBookmark(int index);
     bool __fastcall getBookmark(String mark);
 	int  __fastcall getBookmarkCount();
-	void __fastcall gotoBookmark(String mark);
+	bool __fastcall gotoBookmark(String mark);
 	void __fastcall setfontName(String name);
 	void __fastcall setfontBold();
 	void __fastcall setfontSize(int size);
@@ -50,7 +50,7 @@ public :
     void __fastcall deleteRange();
 	void __fastcall copy();
 	void __fastcall paste();
-	void __fastcall paste_2();
+	bool __fastcall paste_2();
 	void __fastcall gotoNext();
 	void __fastcall insertPageBreak();
 	// Data Word

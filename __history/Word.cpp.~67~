@@ -15,6 +15,8 @@ void __fastcall JunYe_Word::getMarks(){
 // public
 JunYe_Word::JunYe_Word(){
 	Wd.App = CreateOleObject("Word.Application");
+	Wd.App.OlePropertySet("DisplayAlerts", wdAlertsNone);
+	Wd.App.OlePropertySet("Visible", false);
 	Wd.Documents = Wd.App.OlePropertyGet("Documents");
 }
 void __fastcall JunYe_Word::Open(String path){
@@ -120,20 +122,51 @@ void __fastcall JunYe_Word::setInlineShapeWidth(int index, int width){
 String __fastcall JunYe_Word::getBookmark(int index){
 	return Wd.Bookmark[index];
 }
-int  __fastcall getBookmark(String mark){
-	Wd.Range = Wd.ActiveDoc.OlePropertyGet("BookMarks");
-	return Wd.Range.OleFunction("Exist", mark);
+bool  __fastcall JunYe_Word::getBookmark(String mark){
+	do{
+		try{
+			Wd.Range = Wd.ActiveDoc.OlePropertyGet("Bookmarks");
+			bool bobo = Wd.Range.OleFunction("Exists", OleStr(mark));
+			return bobo;
+		}catch(EOleSysError *e){
+			if (e->ErrorCode == -2147418111){
+				BugReport(L"getBookmark Fail, still trying...");
+				Timer(200);
+			}else{
+				BugReport("Error", "Word::getBookmark(String mark)");
+				throw;
+			}
+
+		}catch(Exception *e){
+			BugReport("Error", "Word::getBookmark(String mark)");
+			throw;
+		}
+	}while(1);
 }
 int __fastcall JunYe_Word::getBookmarkCount(){
 	return Wd.BookmarkCount;
 }
-void __fastcall JunYe_Word::gotoBookmark(String mark){
-	try{
-		Wd.Range = Wd.ActiveDoc.OlePropertyGet("Bookmarks").OleFunction("Item", OleStr(mark)).OlePropertyGet("Range");
-	}catch(EOleSysError *e){
-		BugReport("BookMark = " + mark);
-		BugReport(L"Ranging Fail�ABookMark Doesn't exit or Tty Again Later");
-	}
+bool __fastcall JunYe_Word::gotoBookmark(String mark){
+	int retry = 0;
+	do{
+		try{
+			Wd.Range = Wd.ActiveDoc.OlePropertyGet("Bookmarks").OleFunction("Item", OleStr(mark)).OlePropertyGet("Range");
+			return true;
+		}catch(EOleSysError *e){
+			if (e->ErrorCode == -2147418111){
+				retry++;
+				BugReport(L"gotoBookmark Fail, retry for "+IntToStr(retry)+" times");
+				Timer(200);
+			}else{
+				BugReport("Error", "Word::gotoBookmark(String mark)");
+				throw;
+			}
+		}catch(Exception *e){
+			BugReport("Error", "Word::gotoBookmark(String mark)");
+			throw;
+		}
+	}while(retry < 3);
+	return false;
 }
 
 void __fastcall JunYe_Word::setfontName(String fontname){
@@ -165,6 +198,15 @@ void __fastcall JunYe_Word::copy(){
 }
 void __fastcall JunYe_Word::paste(){
 	Wd.Range.OleFunction("PasteAppendTable");
+}
+bool __fastcall JunYe_Word::paste_2(){
+	try{
+		Wd.Range.OleFunction("Paste");
+		return true;
+	}catch(EOleSysError *e){
+		BugReport(L"Word::paste_2 fail, "+ e->Message);
+	}
+	return false;
 }
 void __fastcall JunYe_Word::gotoNext(){
 	Wd.Range = Wd.Range.OleFunction("Next");

@@ -89,10 +89,21 @@ void __fastcall Excel::Close(){
 	Exc.App.Exec(Procedure("Quit"));
 }
 void __fastcall Excel::Close_2(){
-	Exc.Range = Exc.WorkSheet.OlePropertyGet("Cells", 1, 1);
-    Exc.Range.OleFunction("Copy");
-	Exc.WorkBook.OleFunction("Close", false);
-	Exc.App.Exec(Procedure("Quit"));
+	do{
+        try{
+			Exc.Range = Exc.WorkSheet.OlePropertyGet("Cells", 1, 1);
+			Exc.Range.OleFunction("Copy");
+			Exc.WorkBook.OleFunction("Close", false);
+			Exc.App.Exec(Procedure("Quit"));
+			return;
+		}catch(EOleSysError *e){
+			if(e->ErrorCode == -2147418111){
+				BugReport("Close_2 error, keep retry...");
+			}else{
+				throw;
+			}
+		}
+	}while(1);
 }
 
 
